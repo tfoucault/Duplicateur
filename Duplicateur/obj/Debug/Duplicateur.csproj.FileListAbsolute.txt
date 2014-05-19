@@ -1,0 +1,8 @@
+C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\bin\Debug\Duplicateur.exe
+C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\bin\Debug\Duplicateur.pdb
+C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
+C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.exe
+C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.pdb
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.exe
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.pdb
