@@ -15,6 +15,8 @@ namespace Duplicateur
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Usb tempUsb = new Usb('E');
+            tempUsb.FormatDrive("test", "NTFS");
             Application.Run(new Form1());
         }
     }

@@ -6,3 +6,10 @@ C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicate
 C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.pdb
 C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.exe
 C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.pdb
+C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.exe
+C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.pdb
+C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.csprojResolveAssemblyReference.cache
+C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
+C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\bin\Debug\Duplicateur.exe
+C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\bin\Debug\Duplicateur.pdb
