@@ -7,136 +7,63 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Threading;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Duplicateur
 {
     class Usb {
-        private char driveLetter;
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private const int INVALID_HANDLE_VALUE = -1;
+        private const int GENERIC_READ = unchecked((int)0x80000000);
+        private const int GENERIC_WRITE = unchecked((int)0x40000000);
+        private const int FILE_SHARE_READ = unchecked((int)0x00000001);
+        private const int FILE_SHARE_WRITE = unchecked((int)0x00000002);
+        private const int OPEN_EXISTING = unchecked((int)3);
+        private const int FSCTL_LOCK_VOLUME = unchecked((int)0x00090018);
+        private const int FSCTL_DISMOUNT_VOLUME = unchecked((int)0x00090020);
+        private const int IOCTL_STORAGE_EJECT_MEDIA = unchecked((int)0x002D4808);
+        private const int IOCTL_STORAGE_MEDIA_REMOVAL = unchecked((int)0x002D4804);
+
+        [DllImport("kernel32")]
+        private static extern int CloseHandle(IntPtr handle);
+
+        [DllImport("kernel32")]
+        private static extern int DeviceIoControl
+            (IntPtr deviceHandle, uint ioControlCode,
+              IntPtr inBuffer, int inBufferSize,
+              IntPtr outBuffer, int outBufferSize,
+              ref int bytesReturned, IntPtr overlapped);
+
+        [DllImport("kernel32")]
         private static extern IntPtr CreateFile(
-             string lpFileName,
-             uint dwDesiredAccess,
-             uint dwShareMode,
-             IntPtr SecurityAttributes,
-             uint dwCreationDisposition,
-             uint dwFlagsAndAttributes,
-             IntPtr hTemplateFile
-        );
+            string lpFileName,
+            int dwDesiredAccess,
+            int dwShareMode,
+            IntPtr lpSecurityAttributes,
+            int dwCreationDisposition,
+            int dwFlagsAndAttributes,
+            IntPtr hTemplateFile);
 
-        [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern bool DeviceIoControl(
-            IntPtr hDevice, 
-            uint dwIoControlCode,
-            IntPtr lpInBuffer, 
-            uint nInBufferSize,
-            IntPtr lpOutBuffer, 
-            uint nOutBufferSize,
-            out uint lpBytesReturned, 
-            IntPtr lpOverlapped
-        );
-
-        [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true, CharSet = CharSet.Auto)]
-        private static extern bool DeviceIoControl(
-            IntPtr hDevice, 
-            uint dwIoControlCode,
-            byte[] lpInBuffer, 
-            uint nInBufferSize,
-            IntPtr lpOutBuffer, 
-            uint nOutBufferSize,
-            out uint lpBytesReturned, 
-            IntPtr lpOverlapped
-        );
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool CloseHandle(IntPtr hObject);
-
-        private IntPtr handle = IntPtr.Zero;
-
-        const int GENERIC_READ = unchecked((int)0x80000000);
-        const int GENERIC_WRITE = 0x40000000;
-        const int FILE_SHARE_READ = 0x1;
-        const int FILE_SHARE_WRITE = 0x2;
-        const int FSCTL_LOCK_VOLUME = 0x00090018;
-        const int FSCTL_DISMOUNT_VOLUME = 0x00090020;
-        const int IOCTL_STORAGE_EJECT_MEDIA = 0x2D4808;
-        const int IOCTL_STORAGE_MEDIA_REMOVAL = 0x002D4804;
-        private char p;
-
-        /// <summary>
-        /// Constructor for the USBEject class
-        /// </summary>
-        /// <param name="driveLetter">This should be the drive letter. Format: F:/, C:/..</param>
-
-        public Usb(string driveLetter)
+        public static void EjectDrive(char driveLetter)
         {
-            this.driveLetter = driveLetter[0];
-            string filename = @"\\.\" + this.driveLetter + ":";
-            handle = CreateFile(filename, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, IntPtr.Zero, 0x3, 0, IntPtr.Zero);
-        }
+            string path = "\\\\.\\" + driveLetter + ":";
 
-        public Usb(char p)
-        {
-            // TODO: Complete member initialization
-            this.p = p;
-        }
-
-        private IntPtr CreateFile(string filename, int p1, int p2, IntPtr intPtr1, int p3, int p4, IntPtr intPtr2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Eject()
-        {
-            if (LockVolume(handle) && DismountVolume(handle))
+            IntPtr handle = CreateFile(path, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, IntPtr.Zero, OPEN_EXISTING, 0, IntPtr.Zero);
+            Console.WriteLine(handle);
+            if ((long)handle == -1)
             {
-                PreventRemovalOfVolume(handle, false);
-                return AutoEjectVolume(handle);
+                MessageBox.Show("Unable to open drive " + driveLetter);
+                return;
             }
 
-            return false;
-        }
+            int dummy = 0;
 
-        private bool LockVolume(IntPtr handle)
-        {
-            uint byteReturned;
+            DeviceIoControl(handle, IOCTL_STORAGE_EJECT_MEDIA, IntPtr.Zero, 0,
+                IntPtr.Zero, 0, ref dummy, IntPtr.Zero);
 
-            for (int i = 0; i < 10; i++)
-            {
-                if (DeviceIoControl(handle, FSCTL_LOCK_VOLUME, IntPtr.Zero, 0, IntPtr.Zero, 0, out byteReturned, IntPtr.Zero))
-                {
-                    System.Windows.Forms.MessageBox.Show("Lock success!");
-                    return true;
-                }
-                Thread.Sleep(500);
-            }
-            return false;
-        }
+            CloseHandle(handle);
 
-        private bool PreventRemovalOfVolume(IntPtr handle, bool prevent)
-        {
-            byte[] buf = new byte[1];
-            uint retVal;
-
-            buf[0] = (prevent) ? (byte)1 : (byte)0;
-            return DeviceIoControl(handle, IOCTL_STORAGE_MEDIA_REMOVAL, buf, 1, IntPtr.Zero, 0, out retVal, IntPtr.Zero);
-        }
-
-        private bool DismountVolume(IntPtr handle)
-        {
-            uint byteReturned;
-            return DeviceIoControl(handle, FSCTL_DISMOUNT_VOLUME, IntPtr.Zero, 0, IntPtr.Zero, 0, out byteReturned, IntPtr.Zero);
-        }
-
-        private bool AutoEjectVolume(IntPtr handle)
-        {
-            uint byteReturned;
-            return DeviceIoControl(handle, IOCTL_STORAGE_EJECT_MEDIA, IntPtr.Zero, 0, IntPtr.Zero, 0, out byteReturned, IntPtr.Zero);
-        }
-
-        private bool CloseVolume(IntPtr handle)
-        {
-            return CloseHandle(handle);
+            MessageBox.Show("OK to remove drive.");
         }
         #region SetLabel
 
@@ -188,9 +115,9 @@ namespace Duplicateur
         /// <param name="enableCompression">enable drive compression?</param>
         /// <param name="clusterSize">cluster size (default=null for auto). Possible value depends on the file system : 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, ...</param>
         /// <returns>true if success, false if failure</returns>
-        public bool FormatDrive(string label = "", string fileSystem = "NTFS", bool quickFormat = true, bool enableCompression = false, int? clusterSize = null)
+        public static bool FormatDrive(char driveLetter, string label = "", string fileSystem = "NTFS", bool quickFormat = true, bool enableCompression = false, int? clusterSize = null)
         {
-            return FormatDrive_CommandLine(this.driveLetter, label, fileSystem, quickFormat, enableCompression, clusterSize);
+            return FormatDrive_CommandLine(driveLetter, label, fileSystem, quickFormat, enableCompression, clusterSize);
         }
 
         #endregion
