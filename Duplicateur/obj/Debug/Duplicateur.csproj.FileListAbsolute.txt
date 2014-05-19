@@ -13,3 +13,5 @@ C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\bin\Debug\Duplicateur.pdb
 C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\obj\Debug\Duplicateur.Form1.resources
 C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
 C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.exe
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.pdb
