@@ -57,6 +57,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.labelSelectionDossier = new System.Windows.Forms.Label();
             this.listeSelection = new System.Windows.Forms.ListView();
+            this.btnSupprSelection = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnEjecterCles
@@ -231,7 +232,7 @@
             // labelAlerte
             // 
             this.labelAlerte.AutoSize = true;
-            this.labelAlerte.Location = new System.Drawing.Point(12, 481);
+            this.labelAlerte.Location = new System.Drawing.Point(12, 478);
             this.labelAlerte.Name = "labelAlerte";
             this.labelAlerte.Size = new System.Drawing.Size(87, 13);
             this.labelAlerte.TabIndex = 23;
@@ -239,7 +240,7 @@
             // 
             // btnAlertOui
             // 
-            this.btnAlertOui.Location = new System.Drawing.Point(148, 476);
+            this.btnAlertOui.Location = new System.Drawing.Point(148, 530);
             this.btnAlertOui.Name = "btnAlertOui";
             this.btnAlertOui.Size = new System.Drawing.Size(75, 23);
             this.btnAlertOui.TabIndex = 24;
@@ -248,7 +249,7 @@
             // 
             // btnAlertNon
             // 
-            this.btnAlertNon.Location = new System.Drawing.Point(229, 476);
+            this.btnAlertNon.Location = new System.Drawing.Point(229, 530);
             this.btnAlertNon.Name = "btnAlertNon";
             this.btnAlertNon.Size = new System.Drawing.Size(75, 23);
             this.btnAlertNon.TabIndex = 25;
@@ -328,16 +329,27 @@
             // 
             this.listeSelection.Location = new System.Drawing.Point(15, 128);
             this.listeSelection.Name = "listeSelection";
-            this.listeSelection.Size = new System.Drawing.Size(289, 328);
+            this.listeSelection.Size = new System.Drawing.Size(289, 283);
             this.listeSelection.TabIndex = 34;
             this.listeSelection.UseCompatibleStateImageBehavior = false;
             this.listeSelection.SelectedIndexChanged += new System.EventHandler(this.listeSelection_SelectedIndexChanged);
+            // 
+            // btnSupprSelection
+            // 
+            this.btnSupprSelection.Location = new System.Drawing.Point(15, 417);
+            this.btnSupprSelection.Name = "btnSupprSelection";
+            this.btnSupprSelection.Size = new System.Drawing.Size(289, 23);
+            this.btnSupprSelection.TabIndex = 35;
+            this.btnSupprSelection.Text = "Supprimer selection";
+            this.btnSupprSelection.UseVisualStyleBackColor = true;
+            this.btnSupprSelection.Click += new System.EventHandler(this.btnSupprSelection_Click);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(727, 560);
+            this.Controls.Add(this.btnSupprSelection);
             this.Controls.Add(this.listeSelection);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button5);
@@ -405,6 +417,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label labelSelectionDossier;
         private System.Windows.Forms.ListView listeSelection;
+        private System.Windows.Forms.Button btnSupprSelection;
     }
 }
 

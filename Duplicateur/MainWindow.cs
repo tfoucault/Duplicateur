@@ -222,5 +222,13 @@ namespace Duplicateur
 
             return false;
         }
+
+        private void btnSupprSelection_Click(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in listeSelection.SelectedItems){
+
+                listeSelection.Items.Remove(item);
+            }
+        }
     }
 }
