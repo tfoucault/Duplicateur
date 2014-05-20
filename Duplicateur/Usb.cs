@@ -44,9 +44,16 @@ namespace Duplicateur
             int dwFlagsAndAttributes,
             IntPtr hTemplateFile);
 
-        public static void EjectDrive(char driveLetter)
+        public char driveLetter;
+
+        public Usb(char driveLetter)
         {
-            string path = "\\\\.\\" + driveLetter + ":";
+            this.driveLetter = driveLetter;
+        }
+
+        public void EjectDrive()
+        {
+            string path = "\\\\.\\" + this.driveLetter + ":";
 
             IntPtr handle = CreateFile(path, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, IntPtr.Zero, OPEN_EXISTING, 0, IntPtr.Zero);
             Console.WriteLine(handle);
@@ -115,9 +122,9 @@ namespace Duplicateur
         /// <param name="enableCompression">enable drive compression?</param>
         /// <param name="clusterSize">cluster size (default=null for auto). Possible value depends on the file system : 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, ...</param>
         /// <returns>true if success, false if failure</returns>
-        public static bool FormatDrive(char driveLetter, string label = "", string fileSystem = "NTFS", bool quickFormat = true, bool enableCompression = false, int? clusterSize = null)
+        public bool FormatDrive(string label = "", string fileSystem = "NTFS", bool quickFormat = true, bool enableCompression = false, int? clusterSize = null)
         {
-            return FormatDrive_CommandLine(driveLetter, label, fileSystem, quickFormat, enableCompression, clusterSize);
+            return FormatDrive_CommandLine(this.driveLetter, label, fileSystem, quickFormat, enableCompression, clusterSize);
         }
 
         #endregion
