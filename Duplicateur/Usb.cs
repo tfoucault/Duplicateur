@@ -22,7 +22,7 @@ namespace Duplicateur
         private const int FSCTL_LOCK_VOLUME = unchecked((int)0x00090018);
         private const int FSCTL_DISMOUNT_VOLUME = unchecked((int)0x00090020);
         private const int IOCTL_STORAGE_EJECT_MEDIA = unchecked((int)0x002D4808);
-        private const int IOCTL_STORAGE_MEDIA_REMOVAL = unchecked((int)0x002D4804);
+        private const int IOCTL_STORAGE_MEDIA_REMOVAL = unchecked((int)0x002D4804);        
 
         [DllImport("kernel32")]
         private static extern int CloseHandle(IntPtr handle);
@@ -45,6 +45,63 @@ namespace Duplicateur
             IntPtr hTemplateFile);
 
         public char driveLetter;
+
+        public bool copyToRoot = true;
+        private string destinationPath = "";
+        public bool createFolder = false;
+        private string folderToCreate = "";
+
+        public string getFolderToCreate() { return this.folderToCreate; }
+        public string getDestinationPath() { return this.destinationPath; }
+
+        public void setFolderToCreate(String name)
+        {
+            this.folderToCreate = name;
+        }
+
+        public void setDestinationPath(String path)
+        {
+            this.destinationPath = path;
+        }
+
+        public String getTotalSizeStr() {
+
+            //Objet d'informations sur le périphérique amovible
+            DriveInfo di = new DriveInfo(this.driveLetter + ":");
+
+            //On récupere la taille totale en octets
+            long tSize = di.TotalSize;
+
+            //Taille totale de la clé en MO
+            Decimal dSize = tSize / (1024 * 1024);
+            dSize = Math.Round(dSize);
+
+            return dSize + " Mo";
+        }
+
+        public String getFreeSpaceStr()
+        {
+            //Objet d'informations sur le périphérique amovible
+            DriveInfo di = new DriveInfo(this.driveLetter + ":");
+
+            //On récupere la taille dispo en octets
+            long fSize = di.TotalFreeSpace;
+
+            //Taille dispo de la clé en MO
+            Decimal dSize = fSize / (1024 * 1024);
+            dSize = Math.Round(dSize);
+
+            return dSize + " Mo";
+        }
+
+        public String getFormat()
+        {
+            //Objet d'informations sur le périphérique amovible
+            DriveInfo di = new DriveInfo(this.driveLetter + ":");
+
+            //On récupere le type du format (NTFS, exFAT, ...)
+            return di.DriveFormat;
+        }
 
         public Usb(char driveLetter)
         {

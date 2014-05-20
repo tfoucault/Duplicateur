@@ -40,6 +40,7 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.checkBoxDossier = new System.Windows.Forms.CheckBox();
             this.btnSelectionFichiers = new System.Windows.Forms.Button();
+<<<<<<< HEAD
             this.btnSupprSelection = new System.Windows.Forms.Button();
             this.listeSelection = new System.Windows.Forms.ListView();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -91,6 +92,33 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+=======
+            this.btnSelectionDossier = new System.Windows.Forms.Button();
+            this.labelSupportCible = new System.Windows.Forms.Label();
+            this.checkBoxToutesCles = new System.Windows.Forms.CheckBox();
+            this.labelCreerDossier = new System.Windows.Forms.Label();
+            this.labelNotification = new System.Windows.Forms.Label();
+            this.radioButtonNotifNon = new System.Windows.Forms.RadioButton();
+            this.radioButtonNotifOui = new System.Windows.Forms.RadioButton();
+            this.textBoxTel = new System.Windows.Forms.TextBox();
+            this.textBoxMail = new System.Windows.Forms.TextBox();
+            this.labelTel = new System.Windows.Forms.Label();
+            this.labelMail = new System.Windows.Forms.Label();
+            this.buttonLancerCopie = new System.Windows.Forms.Button();
+            this.labelAlerte = new System.Windows.Forms.Label();
+            this.btnAlertOui = new System.Windows.Forms.Button();
+            this.btnAlertNon = new System.Windows.Forms.Button();
+            this.radioButtonRacine = new System.Windows.Forms.RadioButton();
+            this.textBoxNomDossier = new System.Windows.Forms.TextBox();
+            this.radioButtonChooseFolder = new System.Windows.Forms.RadioButton();
+            this.textBoxChooseFolder = new System.Windows.Forms.TextBox();
+            this.btnChooseFolder = new System.Windows.Forms.Button();
+            this.labelSelectionDossier = new System.Windows.Forms.Label();
+            this.listeSelection = new System.Windows.Forms.ListView();
+            this.btnSupprSelection = new System.Windows.Forms.Button();
+            this.listViewClesUsb = new System.Windows.Forms.ListView();
+            this.checkBoxDossier = new System.Windows.Forms.CheckBox();
+>>>>>>> origin/dev
             this.SuspendLayout();
             // 
             // tabControl1
@@ -294,6 +322,7 @@
             this.button5.Text = "Parcourir";
             this.button5.UseVisualStyleBackColor = true;
             // 
+<<<<<<< HEAD
             // textBox3
             // 
             this.textBox3.Enabled = false;
@@ -312,6 +341,18 @@
             this.radioButtonDossier.TabIndex = 85;
             this.radioButtonDossier.Text = "Choisir un dossier";
             this.radioButtonDossier.UseVisualStyleBackColor = true;
+=======
+            // checkBoxToutesCles
+            // 
+            this.checkBoxToutesCles.AutoSize = true;
+            this.checkBoxToutesCles.Location = new System.Drawing.Point(409, 231);
+            this.checkBoxToutesCles.Name = "checkBoxToutesCles";
+            this.checkBoxToutesCles.Size = new System.Drawing.Size(190, 17);
+            this.checkBoxToutesCles.TabIndex = 10;
+            this.checkBoxToutesCles.Text = "Sélectionner tous les périphériques";
+            this.checkBoxToutesCles.UseVisualStyleBackColor = true;
+            this.checkBoxToutesCles.CheckedChanged += new System.EventHandler(this.checkBoxToutesCles_CheckedChanged);
+>>>>>>> origin/dev
             // 
             // radioButtonRacine
             // 
@@ -340,6 +381,7 @@
             // 
             // btnAlertOui
             // 
+<<<<<<< HEAD
             this.btnAlertOui.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAlertOui.BackgroundImage")));
             this.btnAlertOui.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAlertOui.FlatAppearance.BorderSize = 0;
@@ -352,6 +394,17 @@
             this.btnAlertOui.TabIndex = 82;
             this.btnAlertOui.Text = "Oui";
             this.btnAlertOui.UseVisualStyleBackColor = true;
+=======
+            this.radioButtonNotifNon.AutoSize = true;
+            this.radioButtonNotifNon.Checked = true;
+            this.radioButtonNotifNon.Location = new System.Drawing.Point(409, 439);
+            this.radioButtonNotifNon.Name = "radioButtonNotifNon";
+            this.radioButtonNotifNon.Size = new System.Drawing.Size(45, 17);
+            this.radioButtonNotifNon.TabIndex = 16;
+            this.radioButtonNotifNon.TabStop = true;
+            this.radioButtonNotifNon.Text = "Non";
+            this.radioButtonNotifNon.UseVisualStyleBackColor = true;
+>>>>>>> origin/dev
             // 
             // labelAlerte
             // 
@@ -449,6 +502,7 @@
             // 
             // labelCreerDossier
             // 
+<<<<<<< HEAD
             this.labelCreerDossier.AutoSize = true;
             this.labelCreerDossier.Location = new System.Drawing.Point(510, 209);
             this.labelCreerDossier.Name = "labelCreerDossier";
@@ -508,15 +562,82 @@
             this.labelSelectionCible.Size = new System.Drawing.Size(263, 19);
             this.labelSelectionCible.TabIndex = 66;
             this.labelSelectionCible.Text = "Sélection des supports de destination";
+=======
+            this.radioButtonRacine.AutoSize = true;
+            this.radioButtonRacine.Checked = true;
+            this.radioButtonRacine.Location = new System.Drawing.Point(409, 296);
+            this.radioButtonRacine.Name = "radioButtonRacine";
+            this.radioButtonRacine.Size = new System.Drawing.Size(107, 17);
+            this.radioButtonRacine.TabIndex = 28;
+            this.radioButtonRacine.TabStop = true;
+            this.radioButtonRacine.Text = "Copier à la racine";
+            this.radioButtonRacine.UseVisualStyleBackColor = true;
+            // 
+            // textBoxNomDossier
+            // 
+            this.textBoxNomDossier.Enabled = false;
+            this.textBoxNomDossier.Location = new System.Drawing.Point(429, 342);
+            this.textBoxNomDossier.Name = "textBoxNomDossier";
+            this.textBoxNomDossier.Size = new System.Drawing.Size(270, 20);
+            this.textBoxNomDossier.TabIndex = 30;
+            this.textBoxNomDossier.TextChanged += new System.EventHandler(this.textBoxNomDossier_TextChanged);
+            // 
+            // radioButtonChooseFolder
+            // 
+            this.radioButtonChooseFolder.AutoSize = true;
+            this.radioButtonChooseFolder.Location = new System.Drawing.Point(409, 368);
+            this.radioButtonChooseFolder.Name = "radioButtonChooseFolder";
+            this.radioButtonChooseFolder.Size = new System.Drawing.Size(119, 17);
+            this.radioButtonChooseFolder.TabIndex = 31;
+            this.radioButtonChooseFolder.TabStop = true;
+            this.radioButtonChooseFolder.Text = "Chercher un dossier";
+            this.radioButtonChooseFolder.UseVisualStyleBackColor = true;
+            this.radioButtonChooseFolder.CheckedChanged += new System.EventHandler(this.radioButtonChooseFolder_CheckedChanged);
+            // 
+            // textBoxChooseFolder
+            // 
+            this.textBoxChooseFolder.Enabled = false;
+            this.textBoxChooseFolder.Location = new System.Drawing.Point(429, 391);
+            this.textBoxChooseFolder.Name = "textBoxChooseFolder";
+            this.textBoxChooseFolder.ReadOnly = true;
+            this.textBoxChooseFolder.Size = new System.Drawing.Size(189, 20);
+            this.textBoxChooseFolder.TabIndex = 33;
+            // 
+            // btnChooseFolder
+            // 
+            this.btnChooseFolder.Enabled = false;
+            this.btnChooseFolder.Location = new System.Drawing.Point(624, 390);
+            this.btnChooseFolder.Name = "btnChooseFolder";
+            this.btnChooseFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnChooseFolder.TabIndex = 32;
+            this.btnChooseFolder.Text = "Parcourir";
+            this.btnChooseFolder.UseVisualStyleBackColor = true;
+            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
+>>>>>>> origin/dev
             // 
             // labelSelectionDossier
             // 
             this.labelSelectionDossier.AutoSize = true;
             this.labelSelectionDossier.Location = new System.Drawing.Point(246, 73);
             this.labelSelectionDossier.Name = "labelSelectionDossier";
+<<<<<<< HEAD
             this.labelSelectionDossier.Size = new System.Drawing.Size(49, 15);
             this.labelSelectionDossier.TabIndex = 64;
             this.labelSelectionDossier.Text = "Dossier";
+=======
+            this.labelSelectionDossier.Size = new System.Drawing.Size(114, 13);
+            this.labelSelectionDossier.TabIndex = 2;
+            this.labelSelectionDossier.Text = "2) Sélection de dossier";
+            this.labelSelectionDossier.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // listeSelection
+            // 
+            this.listeSelection.Location = new System.Drawing.Point(15, 128);
+            this.listeSelection.Name = "listeSelection";
+            this.listeSelection.Size = new System.Drawing.Size(289, 283);
+            this.listeSelection.TabIndex = 34;
+            this.listeSelection.UseCompatibleStateImageBehavior = false;
+>>>>>>> origin/dev
             // 
             // labelSelectionFichiers
             // 
@@ -656,10 +777,32 @@
             this.label3.TabIndex = 95;
             this.label3.Text = "DUPLICATEUR";
             // 
+            // listViewClesUsb
+            // 
+            this.listViewClesUsb.Location = new System.Drawing.Point(409, 110);
+            this.listViewClesUsb.MultiSelect = false;
+            this.listViewClesUsb.Name = "listViewClesUsb";
+            this.listViewClesUsb.Size = new System.Drawing.Size(290, 115);
+            this.listViewClesUsb.TabIndex = 36;
+            this.listViewClesUsb.UseCompatibleStateImageBehavior = false;
+            this.listViewClesUsb.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewClesUsb_ItemSelectionChanged);
+            // 
+            // checkBoxDossier
+            // 
+            this.checkBoxDossier.AutoSize = true;
+            this.checkBoxDossier.Location = new System.Drawing.Point(409, 320);
+            this.checkBoxDossier.Name = "checkBoxDossier";
+            this.checkBoxDossier.Size = new System.Drawing.Size(120, 17);
+            this.checkBoxDossier.TabIndex = 37;
+            this.checkBoxDossier.Text = "Nom dossier à créer";
+            this.checkBoxDossier.UseVisualStyleBackColor = true;
+            this.checkBoxDossier.CheckedChanged += new System.EventHandler(this.checkBoxDossier_CheckedChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(984, 696);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox3);
@@ -669,6 +812,39 @@
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+=======
+            this.ClientSize = new System.Drawing.Size(727, 560);
+            this.Controls.Add(this.checkBoxDossier);
+            this.Controls.Add(this.listViewClesUsb);
+            this.Controls.Add(this.btnSupprSelection);
+            this.Controls.Add(this.listeSelection);
+            this.Controls.Add(this.textBoxChooseFolder);
+            this.Controls.Add(this.btnChooseFolder);
+            this.Controls.Add(this.radioButtonChooseFolder);
+            this.Controls.Add(this.textBoxNomDossier);
+            this.Controls.Add(this.radioButtonRacine);
+            this.Controls.Add(this.btnAlertNon);
+            this.Controls.Add(this.btnAlertOui);
+            this.Controls.Add(this.labelAlerte);
+            this.Controls.Add(this.buttonLancerCopie);
+            this.Controls.Add(this.labelMail);
+            this.Controls.Add(this.labelTel);
+            this.Controls.Add(this.textBoxMail);
+            this.Controls.Add(this.textBoxTel);
+            this.Controls.Add(this.radioButtonNotifOui);
+            this.Controls.Add(this.radioButtonNotifNon);
+            this.Controls.Add(this.labelNotification);
+            this.Controls.Add(this.labelCreerDossier);
+            this.Controls.Add(this.checkBoxToutesCles);
+            this.Controls.Add(this.labelSupportCible);
+            this.Controls.Add(this.btnSelectionDossier);
+            this.Controls.Add(this.btnSelectionFichiers);
+            this.Controls.Add(this.labelSelectionCible);
+            this.Controls.Add(this.labelSelectionDossier);
+            this.Controls.Add(this.labelSelectionFichiers);
+            this.Controls.Add(this.btnFormaterCles);
+            this.Controls.Add(this.btnEjecterCles);
+>>>>>>> origin/dev
             this.Name = "MainWindow";
             this.Text = "Duplicator";
             this.tabControl1.ResumeLayout(false);
@@ -701,6 +877,7 @@
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSelectionFichiers;
+<<<<<<< HEAD
         private System.Windows.Forms.Button btnSupprSelection;
         private System.Windows.Forms.ListView listeSelection;
         private System.Windows.Forms.TextBox textBox2;
@@ -743,6 +920,33 @@
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox8;
+=======
+        private System.Windows.Forms.Button btnSelectionDossier;
+        private System.Windows.Forms.Label labelSupportCible;
+        private System.Windows.Forms.CheckBox checkBoxToutesCles;
+        private System.Windows.Forms.Label labelCreerDossier;
+        private System.Windows.Forms.Label labelNotification;
+        private System.Windows.Forms.RadioButton radioButtonNotifNon;
+        private System.Windows.Forms.RadioButton radioButtonNotifOui;
+        private System.Windows.Forms.TextBox textBoxTel;
+        private System.Windows.Forms.TextBox textBoxMail;
+        private System.Windows.Forms.Label labelTel;
+        private System.Windows.Forms.Label labelMail;
+        private System.Windows.Forms.Button buttonLancerCopie;
+        private System.Windows.Forms.Label labelAlerte;
+        private System.Windows.Forms.Button btnAlertOui;
+        private System.Windows.Forms.Button btnAlertNon;
+        private System.Windows.Forms.RadioButton radioButtonRacine;
+        private System.Windows.Forms.TextBox textBoxNomDossier;
+        private System.Windows.Forms.RadioButton radioButtonChooseFolder;
+        private System.Windows.Forms.TextBox textBoxChooseFolder;
+        private System.Windows.Forms.Button btnChooseFolder;
+        private System.Windows.Forms.Label labelSelectionDossier;
+        private System.Windows.Forms.ListView listeSelection;
+        private System.Windows.Forms.Button btnSupprSelection;
+        private System.Windows.Forms.ListView listViewClesUsb;
+        private System.Windows.Forms.CheckBox checkBoxDossier;
+>>>>>>> origin/dev
     }
 }
 
