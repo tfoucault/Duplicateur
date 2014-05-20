@@ -18,7 +18,7 @@ namespace Duplicateur
             Usb tempUsb = new Usb('E');
             tempUsb.EjectDrive();
             //tempUsb.FormatDrive("test", "EXFAT");
-            Application.Run(new Form1());
+            Application.Run(new MainWindow());
         }
     }
 }

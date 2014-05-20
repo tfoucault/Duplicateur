@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicateur", "Duplicateur.csproj", "{4688D73F-D1DB-4789-985A-FF893F18F60D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicateur", "Duplicateur.csproj", "{8FF7A41F-2009-4148-A6AB-9739AAD0E4D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4688D73F-D1DB-4789-985A-FF893F18F60D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4688D73F-D1DB-4789-985A-FF893F18F60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4688D73F-D1DB-4789-985A-FF893F18F60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4688D73F-D1DB-4789-985A-FF893F18F60D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF7A41F-2009-4148-A6AB-9739AAD0E4D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF7A41F-2009-4148-A6AB-9739AAD0E4D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF7A41F-2009-4148-A6AB-9739AAD0E4D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF7A41F-2009-4148-A6AB-9739AAD0E4D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

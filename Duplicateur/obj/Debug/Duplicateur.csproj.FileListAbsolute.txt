@@ -6,10 +6,38 @@ C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicate
 C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.pdb
 C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.exe
 C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.pdb
-C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.exe
-C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.pdb
-C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.csprojResolveAssemblyReference.cache
-C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
-C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
-C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\bin\Debug\Duplicateur.exe
-C:\Users\Mathieu PETRINI\Documents\Visual Studio 2012\Projects\Duplicateur\Duplicateur\bin\Debug\Duplicateur.pdb
+C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\obj\Debug\Duplicateur.exe
+C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\obj\Debug\Duplicateur.pdb
+C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\bin\Debug\Duplicateur.exe
+C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\bin\Debug\Duplicateur.pdb
+C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\obj\Debug\Duplicateur.Form1.resources
+C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
+C:\Users\Laetitia\Desktop\duplicateur-dev\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.exe
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.pdb
+F:\Nouveau dossier\Duplicateur\obj\Debug\Duplicateur.exe
+F:\Nouveau dossier\Duplicateur\obj\Debug\Duplicateur.pdb
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\bin\Debug\Duplicateur.exe
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\bin\Debug\Duplicateur.pdb
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.csprojResolveAssemblyReference.cache
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\bin\Debug\Duplicateur.exe.manifest
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\bin\Debug\Duplicateur.application
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.TrustInfo.xml
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.exe.manifest
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.application
+C:\Users\Bot\Workspace\Visual_Studio\Duplicator\Duplicateur\obj\Debug\Duplicateur.MainWindow.resources
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.exe
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.pdb
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.csprojResolveAssemblyReference.cache
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.MainWindow.resources
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\bin\Debug\Duplicateur.exe.manifest
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\bin\Debug\Duplicateur.application
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\bin\Debug\Duplicateur.exe
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\bin\Debug\Duplicateur.pdb
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.TrustInfo.xml
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.exe.manifest
+C:\Users\Bot\Desktop\Duplicator\Duplicateur\obj\Debug\Duplicateur.application
