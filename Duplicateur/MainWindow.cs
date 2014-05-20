@@ -16,10 +16,14 @@ namespace Duplicateur
         //HashTable pour les groupes de liste
         Hashtable groups = new Hashtable();
 
+        //Acces au file manager
+        FileManager fileMgr = new FileManager();
+
         public MainWindow()
         {
             InitializeComponent();
             initListSelection();
+            initListClesUsb();
         }
 
       
@@ -46,6 +50,48 @@ namespace Duplicateur
             { columnHeader0, columnHeader1, columnHeader2 }
             );
         }
+
+
+        private void initListClesUsb()
+        {
+            // Set the view to show details.
+            listViewClesUsb.View = View.Details;
+            // Allow the user to rearrange columns.
+            listViewClesUsb.AllowColumnReorder = true;
+            // Display check boxes.
+            listViewClesUsb.CheckBoxes = true;
+            // Select the item and subitems when selection is made.
+            listViewClesUsb.FullRowSelect = true;
+            // Display grid lines.
+            //listViewClesUsb.GridLines = true;
+            // Sort the items in the list in ascending order.
+            listViewClesUsb.Sorting = SortOrder.Ascending;
+
+            //Ajout des headers dans la liste view des cles usb
+            listViewClesUsb.Columns.Add("Racine", -2, HorizontalAlignment.Left);
+            listViewClesUsb.Columns.Add("Espace libre", -2, HorizontalAlignment.Left);
+            listViewClesUsb.Columns.Add("Espace total", -2, HorizontalAlignment.Left);
+            listViewClesUsb.Columns.Add("Format", -2, HorizontalAlignment.Center);
+
+            List<DriveInfo> usbList = fileMgr.getUsbList();
+
+            foreach (DriveInfo usb in usbList)
+            {
+                Double freeSpace = (Double)usb.AvailableFreeSpace / 1024.0;
+                Double totalSize = (Double)usb.TotalSize / 1024.0;
+                
+                ListViewItem item = new ListViewItem();
+                item.Text = usb.Name;
+                item.SubItems.Add(freeSpace + " KO");
+                item.SubItems.Add(totalSize + " KO");
+                //item.SubItems.Add(usb.AvailableFreeSpace.ToString());
+                //item.SubItems.Add(usb.TotalSize.ToString());
+                item.SubItems.Add(usb.DriveFormat);
+
+                listViewClesUsb.Items.Add(item);
+            }
+        }
+
 
         private void button9_Click(object sender, EventArgs e)
         {

@@ -35,7 +35,6 @@
             this.btnSelectionFichiers = new System.Windows.Forms.Button();
             this.btnSelectionDossier = new System.Windows.Forms.Button();
             this.labelSupportCible = new System.Windows.Forms.Label();
-            this.checkedListBoxCles = new System.Windows.Forms.CheckedListBox();
             this.checkBoxToutesCles = new System.Windows.Forms.CheckBox();
             this.labelCreerDossier = new System.Windows.Forms.Label();
             this.labelNotification = new System.Windows.Forms.Label();
@@ -58,6 +57,7 @@
             this.labelSelectionDossier = new System.Windows.Forms.Label();
             this.listeSelection = new System.Windows.Forms.ListView();
             this.btnSupprSelection = new System.Windows.Forms.Button();
+            this.listViewClesUsb = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // btnEjecterCles
@@ -125,14 +125,6 @@
             this.labelSupportCible.Size = new System.Drawing.Size(113, 13);
             this.labelSupportCible.TabIndex = 8;
             this.labelSupportCible.Text = "Support de destination";
-            // 
-            // checkedListBoxCles
-            // 
-            this.checkedListBoxCles.FormattingEnabled = true;
-            this.checkedListBoxCles.Location = new System.Drawing.Point(409, 101);
-            this.checkedListBoxCles.Name = "checkedListBoxCles";
-            this.checkedListBoxCles.Size = new System.Drawing.Size(290, 124);
-            this.checkedListBoxCles.TabIndex = 9;
             // 
             // checkBoxToutesCles
             // 
@@ -344,11 +336,20 @@
             this.btnSupprSelection.UseVisualStyleBackColor = true;
             this.btnSupprSelection.Click += new System.EventHandler(this.btnSupprSelection_Click);
             // 
+            // listViewClesUsb
+            // 
+            this.listViewClesUsb.Location = new System.Drawing.Point(409, 110);
+            this.listViewClesUsb.Name = "listViewClesUsb";
+            this.listViewClesUsb.Size = new System.Drawing.Size(290, 115);
+            this.listViewClesUsb.TabIndex = 36;
+            this.listViewClesUsb.UseCompatibleStateImageBehavior = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(727, 560);
+            this.Controls.Add(this.listViewClesUsb);
             this.Controls.Add(this.btnSupprSelection);
             this.Controls.Add(this.listeSelection);
             this.Controls.Add(this.textBox2);
@@ -370,7 +371,6 @@
             this.Controls.Add(this.labelNotification);
             this.Controls.Add(this.labelCreerDossier);
             this.Controls.Add(this.checkBoxToutesCles);
-            this.Controls.Add(this.checkedListBoxCles);
             this.Controls.Add(this.labelSupportCible);
             this.Controls.Add(this.btnSelectionDossier);
             this.Controls.Add(this.btnSelectionFichiers);
@@ -395,7 +395,6 @@
         private System.Windows.Forms.Button btnSelectionFichiers;
         private System.Windows.Forms.Button btnSelectionDossier;
         private System.Windows.Forms.Label labelSupportCible;
-        private System.Windows.Forms.CheckedListBox checkedListBoxCles;
         private System.Windows.Forms.CheckBox checkBoxToutesCles;
         private System.Windows.Forms.Label labelCreerDossier;
         private System.Windows.Forms.Label labelNotification;
@@ -418,6 +417,7 @@
         private System.Windows.Forms.Label labelSelectionDossier;
         private System.Windows.Forms.ListView listeSelection;
         private System.Windows.Forms.Button btnSupprSelection;
+        private System.Windows.Forms.ListView listViewClesUsb;
     }
 }
 
