@@ -42,16 +42,11 @@ namespace Duplicateur
 
                         MessageBox.Show(System.Convert.ToString(var_dump(d, 1)));*/
 
-                        usbList.Add(d);
-                        
+                        usbList.Add(d);   
                     }
-
                 }
             }
             catch { MessageBox.Show("Error Fetching Drive Info", "Error"); }
         }
-
     }
-
-
 }

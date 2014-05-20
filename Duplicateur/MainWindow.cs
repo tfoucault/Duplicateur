@@ -19,6 +19,15 @@ namespace Duplicateur
         //Acces au file manager
         FileManager fileMgr = new FileManager();
 
+        //Liste des clés usb
+        Hashtable usbList = new Hashtable();
+
+        //Variable indice listview cles usb
+        int previousClesUsbIndex = -1;
+
+        //Usb courant selectionné
+        Usb currentUsb = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -69,24 +78,27 @@ namespace Duplicateur
 
             //Ajout des headers dans la liste view des cles usb
             listViewClesUsb.Columns.Add("Racine", -2, HorizontalAlignment.Left);
-            listViewClesUsb.Columns.Add("Espace libre", -2, HorizontalAlignment.Left);
             listViewClesUsb.Columns.Add("Espace total", -2, HorizontalAlignment.Left);
+            listViewClesUsb.Columns.Add("Espace libre", -2, HorizontalAlignment.Left);
             listViewClesUsb.Columns.Add("Format", -2, HorizontalAlignment.Center);
 
             List<DriveInfo> usbList = fileMgr.getUsbList();
 
-            foreach (DriveInfo usb in usbList)
+            foreach (DriveInfo di in usbList)
             {
-                Double freeSpace = (Double)usb.AvailableFreeSpace / 1024.0;
-                Double totalSize = (Double)usb.TotalSize / 1024.0;
+                //On crée un objet de type usb
+                string usbName = di.Name.Substring(0, 1);
+                char usbLetter = usbName[0];
+
+                Usb usb = new Usb(usbLetter);
+                this.usbList.Add(di.Name,usb);
                 
                 ListViewItem item = new ListViewItem();
-                item.Text = usb.Name;
-                item.SubItems.Add(freeSpace + " KO");
-                item.SubItems.Add(totalSize + " KO");
-                //item.SubItems.Add(usb.AvailableFreeSpace.ToString());
-                //item.SubItems.Add(usb.TotalSize.ToString());
-                item.SubItems.Add(usb.DriveFormat);
+                item.Tag = di.Name;
+                item.Text = di.Name;
+                item.SubItems.Add(usb.getTotalSizeStr());
+                item.SubItems.Add(usb.getFreeSpaceStr());
+                item.SubItems.Add(usb.getFormat());
 
                 listViewClesUsb.Items.Add(item);
             }
@@ -108,11 +120,6 @@ namespace Duplicateur
         }
 
         private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listeSelection_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
@@ -245,7 +252,6 @@ namespace Duplicateur
                         ListViewItem item = new ListViewItem();
 
                         //On renseigne l'item avec les infos du fichier
-                        item.Tag = fi.FullName;
                         item.Text = fi.Name;
                         item.SubItems.Add(fi.Length.ToString());
                         item.SubItems.Add(fi.LastAccessTime.ToString());
@@ -275,6 +281,114 @@ namespace Duplicateur
 
                 listeSelection.Items.Remove(item);
             }
+        }
+
+        private void checkBoxToutesCles_CheckedChanged(object sender, EventArgs e)
+        {
+            //Si l'etat pas de non coché à coché
+            if (checkBoxToutesCles.CheckState == CheckState.Checked)
+            {
+                //On coche tous les items de la listview cles usb
+                foreach(ListViewItem item in listViewClesUsb.Items){
+                    item.Checked = true;
+                }
+            }
+            else
+            {
+                //On décoche tous les items de la listeview cles usb
+                foreach (ListViewItem item in listViewClesUsb.Items)
+                {
+                    item.Checked = false;
+                }
+            }
+        }
+
+        private void checkBoxDossier_CheckedChanged(object sender, EventArgs e)
+        {
+            //Si l'état pas de coché à non coché
+            if (checkBoxDossier.CheckState == CheckState.Checked)
+            {
+                //On active le champs de saisie
+                textBoxNomDossier.Enabled = true;
+                currentUsb.createFolder = true;
+            }
+            else
+            {
+                //On desactive le champs de saisie
+                textBoxNomDossier.Enabled = false;
+                currentUsb.createFolder = false;
+            }
+        }
+
+        private void radioButtonChooseFolder_CheckedChanged(object sender, EventArgs e)
+        {
+            //Si le bouton passe à l'état coché
+            if (radioButtonChooseFolder.Checked)
+            {
+                //On active le champs de saisie
+                textBoxChooseFolder.Enabled = true;
+                //On active le bouton parcourir
+                btnChooseFolder.Enabled = true;
+                currentUsb.copyToRoot = false;
+            }
+            else
+            {
+                //On desactive le champs de saisie
+                textBoxChooseFolder.Enabled = false;
+                btnChooseFolder.Enabled = false;
+                currentUsb.copyToRoot = true;
+            }
+        }
+
+        private void btnChooseFolder_Click(object sender, EventArgs e)
+        {
+            //On ouvre un dialog pour le choix d'un dossier de desstination
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                //Une fois la séléction validée, on ajoute le chemin absolu au champ de saisie
+                textBoxChooseFolder.Text = fbd.SelectedPath;
+                //On ajoute le chemin comme fichier de destination pour le usb courant
+                currentUsb.setDestinationPath(fbd.SelectedPath);
+            }
+        }
+
+        private void listViewClesUsb_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+
+            if (e.ItemIndex != previousClesUsbIndex)
+            {
+                previousClesUsbIndex = e.ItemIndex;
+                string key = e.Item.Tag.ToString();
+
+                //Récupération de l'usb selectionné dans la liste des usb
+                currentUsb = (Usb)usbList[key];
+
+                //MessageBox.Show(usb.getFolderToCreate());
+                //On met à jour les champs concernés
+                if (currentUsb.copyToRoot)
+                {
+                    radioButtonRacine.Checked = true;
+                    radioButtonChooseFolder.Checked = false;
+                }
+                else
+                {
+                    radioButtonRacine.Checked = false;
+                    radioButtonChooseFolder.Checked = true;
+                    textBoxChooseFolder.Text = currentUsb.getDestinationPath();
+                }
+
+                //On met a jour le dossier à créer si existe
+                checkBoxDossier.Checked = currentUsb.createFolder;
+                textBoxNomDossier.Text = currentUsb.getFolderToCreate();
+            }
+        }
+
+        private void textBoxNomDossier_TextChanged(object sender, EventArgs e)
+        {
+            //On sauvegarde le nom de dossier a creer
+            currentUsb.setFolderToCreate(textBoxNomDossier.Text);
         }
     }
 }
