@@ -48,3 +48,27 @@ C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicate
 C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.TrustInfo.xml
 C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.exe.manifest
 C:\Users\Bot\Workspace\Visual_Studio\Duplicateur\Duplicateur\obj\Debug\Duplicateur.application
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\bin\Debug\Duplicateur.exe.manifest
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\bin\Debug\Duplicateur.application
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\bin\Debug\Duplicateur.exe
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\bin\Debug\Duplicateur.pdb
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.csprojResolveAssemblyReference.cache
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.MainWindow.resources
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.TrustInfo.xml
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.exe.manifest
+C:\Users\Laetitia\Desktop\Cercle de projet\Duplicateur\obj\Debug\Duplicateur.application
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.exe
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.pdb
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\bin\Debug\Duplicateur.exe.manifest
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\bin\Debug\Duplicateur.application
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\bin\Debug\Duplicateur.exe
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\bin\Debug\Duplicateur.pdb
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.csprojResolveAssemblyReference.cache
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.MainWindow.resources
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.Properties.Resources.resources
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.TrustInfo.xml
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.exe.manifest
+C:\Users\Bot\Desktop\Cercle de projet copy\Duplicateur\obj\Debug\Duplicateur.application

@@ -22,7 +22,7 @@ namespace Duplicateur
         private const int FSCTL_LOCK_VOLUME = unchecked((int)0x00090018);
         private const int FSCTL_DISMOUNT_VOLUME = unchecked((int)0x00090020);
         private const int IOCTL_STORAGE_EJECT_MEDIA = unchecked((int)0x002D4808);
-        private const int IOCTL_STORAGE_MEDIA_REMOVAL = unchecked((int)0x002D4804);        
+        private const int IOCTL_STORAGE_MEDIA_REMOVAL = unchecked((int)0x002D4804);
 
         [DllImport("kernel32")]
         private static extern int CloseHandle(IntPtr handle);
@@ -50,9 +50,12 @@ namespace Duplicateur
         private string destinationPath = "";
         public bool createFolder = false;
         private string folderToCreate = "";
+        public bool sendNotification = false;
+        private string notifMailAddress = "";
 
         public string getFolderToCreate() { return this.folderToCreate; }
         public string getDestinationPath() { return this.destinationPath; }
+        public string getNotifMailAddress() { return this.notifMailAddress; }
 
         public void setFolderToCreate(String name)
         {
@@ -62,6 +65,11 @@ namespace Duplicateur
         public void setDestinationPath(String path)
         {
             this.destinationPath = path;
+        }
+
+        public void setNotifMailAddress(string mailAddress)
+        {
+            this.notifMailAddress = mailAddress;
         }
 
         public String getTotalSizeStr() {

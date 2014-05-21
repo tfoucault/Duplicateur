@@ -118,6 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonLancerCopie.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAUAAAAA6CAYAAADBXoC5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAA/UlEQVR4Xu3UsRGCUAAFQSPa
+        sy1DLMlyCKAF/H/GiLECboNN3svv8fxsy/AejuEEuLnZutm8ZQZw/Y0AJa8ZwP0yAhTsM4D/DoDbE0Ag
+        SwCBLAEEsgQQyBJAIEsAgSwBBLIEEMgSQCBLAIEsAQSyBBDIEkAgSwCBLAEEsgQQyBJAIEsAgSwBBLIE
+        EMgSQCBLAIEsAQSyBBDIEkAgSwCBLAEEsgQQyBJAIEsAgSwBBLIEEMgSQCBLAIEsAQSyBBDIEkAgSwCB
+        LAEEsgQQyBJAIEsAgSwBBLIEEMgSQCBLAIEsAQSyBBDIEkAgSwCBLAEEsgQQyBJAIEsAgajt/AKSBkSg
+        KJMcUwAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="pictureBox8.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEAAAAAAAD/7gAOQWRvYmUAZAAAAAAB/9sAQwAEAwMDAwMEAwMEBgQDBAYHBQQE
@@ -219,15 +230,6 @@
         CAD/bjZrtGtbvjfe1fOUUnWTAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="button5.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAEsAAAAlCAYAAAAKsBTAAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
-        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAACaSURBVGhD7dqhEYAwEAVRVNqjLXBQEuVEhBYgx0RB
-        JsP6Fc/cudV/mo+cqr06q0sf0SX6pIi1taPGlohVXkf1lYjVe6jDWICxAGMBxgKMBRgLMBZgLMBYgLEA
-        YwHGAowFGAswFmAswFiAsQBjAcYCjAUYCzAWYCzAWICxAGMBxgKMBRgLiFjus/559lku//5ZI5ab0rG2
-        Kc3pBuz1KDZajL9aAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="btnAlertNon.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEgAAAAgCAYAAACxSj5wAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
@@ -246,18 +248,16 @@
         KPLDIzfpU3rDM0mDtKgmR7sAsXAR+DBE9lwAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="buttonLancerCopie.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnSelectionDossier.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAUAAAAA6CAYAAADBXoC5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAA/UlEQVR4Xu3UsRGCUAAFQSPa
-        sy1DLMlyCKAF/H/GiLECboNN3svv8fxsy/AejuEEuLnZutm8ZQZw/Y0AJa8ZwP0yAhTsM4D/DoDbE0Ag
-        SwCBLAEEsgQQyBJAIEsAgSwBBLIEEMgSQCBLAIEsAQSyBBDIEkAgSwCBLAEEsgQQyBJAIEsAgSwBBLIE
-        EMgSQCBLAIEsAQSyBBDIEkAgSwCBLAEEsgQQyBJAIEsAgSwBBLIEEMgSQCBLAIEsAQSyBBDIEkAgSwCB
-        LAEEsgQQyBJAIEsAgSwBBLIEEMgSQCBLAIEsAQSyBBDIEkAgSwCBLAEEsgQQyBJAIEsAgajt/AKSBkSg
-        KJMcUwAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAAEsAAAAlCAYAAAAKsBTAAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAACaSURBVGhD7dqhEYAwEAVRVNqjLXBQEuVEhBYgx0RB
+        JsP6Fc/cudV/mo+cqr06q0sf0SX6pIi1taPGlohVXkf1lYjVe6jDWICxAGMBxgKMBRgLMBZgLMBYgLEA
+        YwHGAowFGAswFmAswFiAsQBjAcYCjAUYCzAWYCzAWICxAGMBxgKMBRgLiFjus/559lku//5ZI5ab0rG2
+        Kc3pBuz1KDZajL9aAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnSelectionDossier.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnChoixDossier.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAEsAAAAlCAYAAAAKsBTAAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAACaSURBVGhD7dqhEYAwEAVRVNqjLXBQEuVEhBYgx0RB

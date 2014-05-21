@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Duplicateur.exe" size="27648">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Duplicateur.exe" size="50688">
       <assemblyIdentity name="Duplicateur" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>uEHCoLsVxZQvd5POrA0t5Ic9i8w=</dsig:DigestValue>
+        <dsig:DigestValue>yvf9J2eFLEP2Ajj/p9wTcl4MiFw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
