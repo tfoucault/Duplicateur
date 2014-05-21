@@ -7,28 +7,26 @@ using System.IO;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Collections;
+using System.Threading;
 
 namespace Duplicateur
 {
 
     public class FileManager
     {
-
         private List<DriveInfo> usbList = new List<DriveInfo>();
-        
         
         public FileManager()
         {
-           this.dinfo();
+           dinfo();
         }
-
 
         public List<DriveInfo> getUsbList()
         {
             return usbList;
         }
 
-        public void dinfo()
+        private void dinfo()
         {
             try
             {

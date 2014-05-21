@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.buttonLancerCopie = new System.Windows.Forms.Button();
             this.listeClesUsb = new System.Windows.Forms.ListView();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
@@ -43,8 +45,6 @@
             this.btnSelectionFichiers = new System.Windows.Forms.Button();
             this.btnSupprSelection = new System.Windows.Forms.Button();
             this.listeSelection = new System.Windows.Forms.ListView();
-            this.btnAlertNon = new System.Windows.Forms.Button();
-            this.btnAlertOui = new System.Windows.Forms.Button();
             this.labelAlerte = new System.Windows.Forms.Label();
             this.checkBoxToutesCles = new System.Windows.Forms.CheckBox();
             this.labelSupportCible = new System.Windows.Forms.Label();
@@ -67,6 +67,12 @@
             this.textBoxMail = new System.Windows.Forms.TextBox();
             this.labelNotification = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -74,6 +80,12 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.pictureBox15 = new System.Windows.Forms.PictureBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.pictureBox16 = new System.Windows.Forms.PictureBox();
+            this.pictureBox17 = new System.Windows.Forms.PictureBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.listView2 = new System.Windows.Forms.ListView();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -85,22 +97,10 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.pictureBox16 = new System.Windows.Forms.PictureBox();
-            this.pictureBox17 = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -110,19 +110,18 @@
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -141,6 +140,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.richTextBox1);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.pictureBox11);
             this.tabPage1.Controls.Add(this.buttonLancerCopie);
@@ -155,8 +155,6 @@
             this.tabPage1.Controls.Add(this.btnSelectionFichiers);
             this.tabPage1.Controls.Add(this.btnSupprSelection);
             this.tabPage1.Controls.Add(this.listeSelection);
-            this.tabPage1.Controls.Add(this.btnAlertNon);
-            this.tabPage1.Controls.Add(this.btnAlertOui);
             this.tabPage1.Controls.Add(this.labelAlerte);
             this.tabPage1.Controls.Add(this.checkBoxToutesCles);
             this.tabPage1.Controls.Add(this.labelSupportCible);
@@ -173,6 +171,25 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dubliquer du contenu";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label8.Location = new System.Drawing.Point(304, 442);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 15);
+            this.label8.TabIndex = 104;
+            this.label8.Text = "Message d\'alerte";
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox11.BackgroundImage")));
+            this.pictureBox11.Location = new System.Drawing.Point(276, 438);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(22, 23);
+            this.pictureBox11.TabIndex = 103;
+            this.pictureBox11.TabStop = false;
+            // 
             // buttonLancerCopie
             // 
             this.buttonLancerCopie.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonLancerCopie.BackgroundImage")));
@@ -187,6 +204,7 @@
             this.buttonLancerCopie.TabIndex = 102;
             this.buttonLancerCopie.Text = "LANCER LA COPIE";
             this.buttonLancerCopie.UseVisualStyleBackColor = true;
+            this.buttonLancerCopie.Click += new System.EventHandler(this.buttonLancerCopie_Click);
             // 
             // listeClesUsb
             // 
@@ -240,7 +258,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label4.Location = new System.Drawing.Point(36, 481);
+            this.label4.Location = new System.Drawing.Point(173, 442);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 15);
             this.label4.TabIndex = 95;
@@ -249,7 +267,7 @@
             // pictureBox5
             // 
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
-            this.pictureBox5.Location = new System.Drawing.Point(8, 477);
+            this.pictureBox5.Location = new System.Drawing.Point(145, 438);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(22, 23);
             this.pictureBox5.TabIndex = 94;
@@ -258,7 +276,7 @@
             // pictureBox4
             // 
             this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
-            this.pictureBox4.Location = new System.Drawing.Point(8, 448);
+            this.pictureBox4.Location = new System.Drawing.Point(10, 439);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(22, 23);
             this.pictureBox4.TabIndex = 93;
@@ -307,41 +325,11 @@
             this.listeSelection.TabIndex = 90;
             this.listeSelection.UseCompatibleStateImageBehavior = false;
             // 
-            // btnAlertNon
-            // 
-            this.btnAlertNon.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAlertNon.BackgroundImage")));
-            this.btnAlertNon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAlertNon.FlatAppearance.BorderSize = 0;
-            this.btnAlertNon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlertNon.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAlertNon.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnAlertNon.Location = new System.Drawing.Point(371, 503);
-            this.btnAlertNon.Name = "btnAlertNon";
-            this.btnAlertNon.Size = new System.Drawing.Size(72, 32);
-            this.btnAlertNon.TabIndex = 83;
-            this.btnAlertNon.Text = "Non";
-            this.btnAlertNon.UseVisualStyleBackColor = true;
-            // 
-            // btnAlertOui
-            // 
-            this.btnAlertOui.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAlertOui.BackgroundImage")));
-            this.btnAlertOui.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAlertOui.FlatAppearance.BorderSize = 0;
-            this.btnAlertOui.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAlertOui.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAlertOui.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.btnAlertOui.Location = new System.Drawing.Point(290, 503);
-            this.btnAlertOui.Name = "btnAlertOui";
-            this.btnAlertOui.Size = new System.Drawing.Size(72, 32);
-            this.btnAlertOui.TabIndex = 82;
-            this.btnAlertOui.Text = "Oui";
-            this.btnAlertOui.UseVisualStyleBackColor = true;
-            // 
             // labelAlerte
             // 
             this.labelAlerte.AutoSize = true;
             this.labelAlerte.ForeColor = System.Drawing.Color.IndianRed;
-            this.labelAlerte.Location = new System.Drawing.Point(36, 451);
+            this.labelAlerte.Location = new System.Drawing.Point(38, 442);
             this.labelAlerte.Name = "labelAlerte";
             this.labelAlerte.Size = new System.Drawing.Size(100, 15);
             this.labelAlerte.TabIndex = 81;
@@ -592,6 +580,63 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Formater les clés USB";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label9.Location = new System.Drawing.Point(44, 327);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(87, 13);
+            this.label9.TabIndex = 110;
+            this.label9.Text = "Message d\'alerte";
+            // 
+            // pictureBox12
+            // 
+            this.pictureBox12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox12.BackgroundImage")));
+            this.pictureBox12.Location = new System.Drawing.Point(16, 323);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(22, 23);
+            this.pictureBox12.TabIndex = 109;
+            this.pictureBox12.TabStop = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.ForestGreen;
+            this.label10.Location = new System.Drawing.Point(44, 296);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.TabIndex = 108;
+            this.label10.Text = "Message d\'alerte";
+            // 
+            // pictureBox13
+            // 
+            this.pictureBox13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox13.BackgroundImage")));
+            this.pictureBox13.Location = new System.Drawing.Point(16, 292);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(22, 23);
+            this.pictureBox13.TabIndex = 107;
+            this.pictureBox13.TabStop = false;
+            // 
+            // pictureBox14
+            // 
+            this.pictureBox14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox14.BackgroundImage")));
+            this.pictureBox14.Location = new System.Drawing.Point(16, 263);
+            this.pictureBox14.Name = "pictureBox14";
+            this.pictureBox14.Size = new System.Drawing.Size(22, 23);
+            this.pictureBox14.TabIndex = 106;
+            this.pictureBox14.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.IndianRed;
+            this.label11.Location = new System.Drawing.Point(44, 266);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(87, 13);
+            this.label11.TabIndex = 105;
+            this.label11.Text = "Message d\'alerte";
+            // 
             // button1
             // 
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
@@ -676,6 +721,63 @@
             this.tabPage3.Size = new System.Drawing.Size(949, 544);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Ejecter les clés USB";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label12.Location = new System.Drawing.Point(43, 328);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(87, 13);
+            this.label12.TabIndex = 114;
+            this.label12.Text = "Message d\'alerte";
+            // 
+            // pictureBox15
+            // 
+            this.pictureBox15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox15.BackgroundImage")));
+            this.pictureBox15.Location = new System.Drawing.Point(15, 324);
+            this.pictureBox15.Name = "pictureBox15";
+            this.pictureBox15.Size = new System.Drawing.Size(22, 23);
+            this.pictureBox15.TabIndex = 113;
+            this.pictureBox15.TabStop = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.ForestGreen;
+            this.label13.Location = new System.Drawing.Point(43, 297);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(87, 13);
+            this.label13.TabIndex = 112;
+            this.label13.Text = "Message d\'alerte";
+            // 
+            // pictureBox16
+            // 
+            this.pictureBox16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox16.BackgroundImage")));
+            this.pictureBox16.Location = new System.Drawing.Point(15, 293);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(22, 23);
+            this.pictureBox16.TabIndex = 111;
+            this.pictureBox16.TabStop = false;
+            // 
+            // pictureBox17
+            // 
+            this.pictureBox17.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox17.BackgroundImage")));
+            this.pictureBox17.Location = new System.Drawing.Point(15, 264);
+            this.pictureBox17.Name = "pictureBox17";
+            this.pictureBox17.Size = new System.Drawing.Size(22, 23);
+            this.pictureBox17.TabIndex = 110;
+            this.pictureBox17.TabStop = false;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.IndianRed;
+            this.label14.Location = new System.Drawing.Point(43, 267);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(87, 13);
+            this.label14.TabIndex = 109;
+            this.label14.Text = "Message d\'alerte";
             // 
             // button2
             // 
@@ -791,138 +893,13 @@
             this.label3.TabIndex = 95;
             this.label3.Text = "DUPLICATEUR";
             // 
-            // label8
+            // richTextBox1
             // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(36, 512);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 15);
-            this.label8.TabIndex = 104;
-            this.label8.Text = "Message d\'alerte";
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox11.BackgroundImage")));
-            this.pictureBox11.Location = new System.Drawing.Point(8, 508);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox11.TabIndex = 103;
-            this.pictureBox11.TabStop = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label9.Location = new System.Drawing.Point(44, 327);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 13);
-            this.label9.TabIndex = 110;
-            this.label9.Text = "Message d\'alerte";
-            // 
-            // pictureBox12
-            // 
-            this.pictureBox12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox12.BackgroundImage")));
-            this.pictureBox12.Location = new System.Drawing.Point(16, 323);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox12.TabIndex = 109;
-            this.pictureBox12.TabStop = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label10.Location = new System.Drawing.Point(44, 296);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 13);
-            this.label10.TabIndex = 108;
-            this.label10.Text = "Message d\'alerte";
-            // 
-            // pictureBox13
-            // 
-            this.pictureBox13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox13.BackgroundImage")));
-            this.pictureBox13.Location = new System.Drawing.Point(16, 292);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox13.TabIndex = 107;
-            this.pictureBox13.TabStop = false;
-            // 
-            // pictureBox14
-            // 
-            this.pictureBox14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox14.BackgroundImage")));
-            this.pictureBox14.Location = new System.Drawing.Point(16, 263);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox14.TabIndex = 106;
-            this.pictureBox14.TabStop = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.IndianRed;
-            this.label11.Location = new System.Drawing.Point(44, 266);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 13);
-            this.label11.TabIndex = 105;
-            this.label11.Text = "Message d\'alerte";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label12.Location = new System.Drawing.Point(43, 328);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(87, 13);
-            this.label12.TabIndex = 114;
-            this.label12.Text = "Message d\'alerte";
-            // 
-            // pictureBox15
-            // 
-            this.pictureBox15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox15.BackgroundImage")));
-            this.pictureBox15.Location = new System.Drawing.Point(15, 324);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox15.TabIndex = 113;
-            this.pictureBox15.TabStop = false;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label13.Location = new System.Drawing.Point(43, 297);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 13);
-            this.label13.TabIndex = 112;
-            this.label13.Text = "Message d\'alerte";
-            // 
-            // pictureBox16
-            // 
-            this.pictureBox16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox16.BackgroundImage")));
-            this.pictureBox16.Location = new System.Drawing.Point(15, 293);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox16.TabIndex = 111;
-            this.pictureBox16.TabStop = false;
-            // 
-            // pictureBox17
-            // 
-            this.pictureBox17.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox17.BackgroundImage")));
-            this.pictureBox17.Location = new System.Drawing.Point(15, 264);
-            this.pictureBox17.Name = "pictureBox17";
-            this.pictureBox17.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox17.TabIndex = 110;
-            this.pictureBox17.TabStop = false;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.IndianRed;
-            this.label14.Location = new System.Drawing.Point(43, 267);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(87, 13);
-            this.label14.TabIndex = 109;
-            this.label14.Text = "Message d\'alerte";
+            this.richTextBox1.Location = new System.Drawing.Point(12, 468);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(431, 67);
+            this.richTextBox1.TabIndex = 105;
+            this.richTextBox1.Text = "";
             // 
             // MainWindow
             // 
@@ -942,6 +919,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -955,20 +933,19 @@
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -983,8 +960,6 @@
         private System.Windows.Forms.Button btnSelectionFichiers;
         private System.Windows.Forms.Button btnSupprSelection;
         private System.Windows.Forms.ListView listeSelection;
-        private System.Windows.Forms.Button btnAlertNon;
-        private System.Windows.Forms.Button btnAlertOui;
         private System.Windows.Forms.Label labelAlerte;
         private System.Windows.Forms.CheckBox checkBoxToutesCles;
         private System.Windows.Forms.Label labelSupportCible;
@@ -1046,6 +1021,7 @@
         private System.Windows.Forms.PictureBox pictureBox16;
         private System.Windows.Forms.PictureBox pictureBox17;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

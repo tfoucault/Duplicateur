@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Duplicateur
@@ -14,23 +15,27 @@ namespace Duplicateur
     public partial class MainWindow : Form
     {
         //HashTable pour les groupes de liste
-        Hashtable groups = new Hashtable();
+        private Hashtable groups = new Hashtable();
 
         //Acces au file manager
-        FileManager fileMgr = new FileManager();
+        private FileManager fileMgr = new FileManager();
 
         //Liste des clés usb
-        Hashtable usbList = new Hashtable();
+        private Hashtable usbList = new Hashtable();
 
         //Variable indice listview cles usb
-        int previousClesUsbIndex = -1;
+        private int previousClesUsbIndex = -1;
 
         //Usb courant selectionné
-        Usb currentUsb = null;
+        private Usb currentUsb = null;
 
-        //Variable modif check list or global
-        bool modifCheckFromList = false;
-        bool modifCheckGlobal = false;
+        //Variable qui contient la taille de la liste
+        //de selection exprimée en octets
+        private long selectionSize = -1;
+        private List<String> selectionPaths = new List<String>();
+
+        private Thread selectionSizeThread = null;
+        private volatile bool selectionListeUpdated = false;
 
         public MainWindow()
         {
@@ -190,6 +195,36 @@ namespace Duplicateur
                         item.Group = lvg;
                     }
                 }                
+
+                /*
+                //On met à jour la nouvelle taille de la liste de selection
+                updateSelectionPaths();
+
+                //Si un thread est en cours
+                if (selectionSizeThread != null && selectionSizeThread.IsAlive)
+                {
+                    //On arrete le thread en cours
+                    selectionListeUpdated = true;
+                    MessageBox.Show("Thread en cours. Annulation ...");
+
+                    //On attend que le thread se termine
+                    while (selectionSizeThread.ThreadState != ThreadState.Stopped)
+                    {
+                        //Do nothing
+                    }
+
+                    MessageBox.Show("Thread arrété");
+                }
+                else
+                {
+                    MessageBox.Show("Demarrage nouveau thread");
+                    selectionSizeThread = new Thread(updateSelectionSize);
+                    selectionSizeThread.Start();
+                }
+                //string selectSizeStr = Math.Round(((decimal)selectionSize) / (1024*1024)) + " Mo";
+                //string selectSizeStr = selectionSize + " octets";
+                //MessageBox.Show(selectSizeStr);
+                 * */
             }
         }
 
@@ -256,6 +291,12 @@ namespace Duplicateur
                         item.Group = lvg;
                     }
                 }
+
+                //On calcule la nouvelle taille de la liste de selection
+                //long selectionSize = getSelectionSize();
+                //string selectSizeStr = selectionSize + " Octets";
+
+                //MessageBox.Show(selectSizeStr);
             }
         }
 
@@ -406,19 +447,10 @@ namespace Duplicateur
             //le groupe de paramétrage pour la clé selectionnée
             if(e.Item.Selected) groupBoxParamCle.Enabled = e.Item.Checked;
 
-            /*
-            if (!modifCheckGlobal || modifCheckFromList)
-            {
-                //On regarde le nombre de cles selectionnées
-                int nbCles = nombreClesSelectionnes();
-
-                if (nbCles == 0) checkBoxToutesCles.CheckState = CheckState.Unchecked;
-                else if (nbCles > 0 && nbCles < listeClesUsb.Items.Count) checkBoxToutesCles.CheckState = CheckState.Indeterminate;
-                else checkBoxToutesCles.CheckState = CheckState.Checked;
-
-                modifCheckGlobal = true;
-            }
-             * */
+            //On met à jour le statut is selected de la clé coche/décochée
+            //MessageBox.Show("Activation / desactivation de " + e.Item.Tag.ToString());
+            Usb usb = (Usb)usbList[e.Item.Tag.ToString()];
+            usb.isSelected = e.Item.Checked;
         }
 
         /*Fonction qui permet de choisir un dossier de destination
@@ -513,5 +545,230 @@ namespace Duplicateur
             currentUsb.setNotifMailAddress(textBoxMail.Text);
         }
    
+        /*Fonction pour actualiser la taille de la liste de selection
+         * */
+        public void updateSelectionSize()
+        {
+            selectionSize = -1;
+
+            string[] tempList = new string[selectionPaths.Count];
+            selectionPaths.CopyTo(tempList);
+
+            foreach (string item in tempList)
+            {
+                if (selectionListeUpdated) break;
+
+                if (Directory.Exists(item))
+                {
+                    if (selectionListeUpdated) break;
+                    selectionSize += getFolderSize(item);
+                }
+                else
+                {
+                    if (selectionListeUpdated) break;
+                    FileInfo fi = new FileInfo(item);
+                    selectionSize += fi.Length;
+                }
+            }
+
+            MessageBox.Show("Size of selection have been update : " + selectionSize + " octets");
+        }
+
+        /*Fonction pour actualiser la taille de la liste des chemins de fichier de la liste
+         * */
+        private void updateSelectionPaths()
+        {
+            selectionPaths.Clear();
+
+            foreach (ListViewItem item in listeSelection.Items)
+            {
+                selectionPaths.Add(item.Tag.ToString());
+            }
+        }
+
+        /*Fonction qui permet de calculer recursivement la taille d'un dossier
+         * */
+        private long getFolderSize(String path)
+        {
+            long folderSize = -1;
+
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo dir = new DirectoryInfo(path);
+
+                try
+                {
+                    FileInfo[] files = dir.GetFiles();
+
+                    foreach (FileInfo file in files)
+                    {
+                        folderSize += file.Length;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                try
+                {
+                    DirectoryInfo[] directories = dir.GetDirectories();
+
+                    foreach (DirectoryInfo directory in directories)
+                    {
+                        folderSize += getFolderSize(directory.FullName);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            return folderSize;
+        }
+
+        /* Fonction qui permet de calculer la taille de l'ensemble des fichiers à copier
+         * */
+        private long getSelectionSize()
+        {
+            long size = -1;
+
+            foreach (ListViewItem item in listeSelection.Items)
+            {
+                if (selectionListeUpdated) break;
+
+                if (Directory.Exists(item.Tag.ToString()))
+                {
+                    size += getFolderSize(item.Tag.ToString());
+                }
+                else
+                {
+                    FileInfo fi = new FileInfo(item.Tag.ToString());
+                    size += fi.Length;
+                }
+            }
+
+            //MessageBox.Show("Size of selection have been update : " + size + " octets");
+
+            return size;
+        }
+
+        /* Fonction qui permet de vérifier que toutes les contraintes sont
+         * remplies avant de pouvoir commencer la copie des fichiers
+         * */
+        private void buttonLancerCopie_Click(object sender, EventArgs e)
+        {
+            //Initialisation d'un message d'erreur dans le cas ou la copie n'est pas possible
+            string errorMessage = "";
+
+            /**********************************************************************/
+            if (listeSelection.Items.Count == 0)
+            {
+                errorMessage = "Aucun fichier à copier";
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            /**********************************************************************/
+            //On vérifie qu'au moins une clé est selectionnée
+
+            int nbCles = 0;
+
+            foreach (string key in usbList.Keys)
+            {
+                Usb usb = (Usb)usbList[key];
+                if (usb.isSelected) nbCles++;
+            }
+
+            if (nbCles == 0)
+            {
+                errorMessage = "Au moins une clé doit être séléctionnée";
+                MessageBox.Show(errorMessage);
+                return;
+            }
+            /**********************************************************************/
+            //Verification de l'espace libre sur les cles de destination selectionnées
+
+            bool enoughSpace = true;
+
+            //On calcule la taille de la selection à copier
+            long selectionSize = getSelectionSize();
+
+            //Pour chaque clé, on vérifie qu'assez d'espace est dispo
+            foreach (string key in usbList.Keys)
+            {
+                Usb usb = (Usb)usbList[key];
+
+                if (usb.isSelected && usb.getFreeSpace() <= selectionSize)
+                {
+                    errorMessage += "La clé " + usb.driveLetter + " ne contient pas assez d'espace pour la copie\n";
+                    enoughSpace = false;
+                }
+            }
+
+            if (!enoughSpace)
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            /**********************************************************************/
+
+            //On démarre la copie
+            MessageBox.Show("Demarrage de la copie");
+        }
+
+        /*Fonction qui permet de copier recursivement des dossiers 
+         * */
+        private void directoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            // Get the subdirectories for the specified directory.
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            // If the destination directory doesn't exist, create it. 
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            // Get the files in the directory and copy them to the new location.
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                //try
+                //{
+                string temppath = Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+                //}
+                //catch (Exception e)
+                //{
+                //MessageBox.Show(e.Message);
+                //}
+            }
+
+            // If copying subdirectories, copy them and their contents to new location. 
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+                    directoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
+        }
+
+        /*Fonction qui permet de copier toute la liste de fichier et dossier selectionnés
+         * */
+        private void processCopy()
+        {
+        }
     }
 }

@@ -46,10 +46,11 @@ namespace Duplicateur
 
         public char driveLetter;
 
+        public bool isSelected = false;
         public bool copyToRoot = true;
         private string destinationPath = "";
-        public bool createFolder = false;
-        private string folderToCreate = "";
+        public bool createFolder = true;
+        private string folderToCreate = "Duplication";
         public bool sendNotification = false;
         private string notifMailAddress = "";
 
@@ -85,6 +86,22 @@ namespace Duplicateur
             dSize = Math.Round(dSize);
 
             return dSize + " Mo";
+        }
+
+        public long getTotalSize()
+        {
+            //Objet d'informations sur le périphérique amovible
+            DriveInfo di = new DriveInfo(this.driveLetter + ":");
+
+            return di.TotalSize;
+        }
+
+        public long getFreeSpace()
+        {
+            //Objet d'informations sur le périphérique amovible
+            DriveInfo di = new DriveInfo(this.driveLetter + ":");
+
+            return di.TotalFreeSpace;
         }
 
         public String getFreeSpaceStr()
