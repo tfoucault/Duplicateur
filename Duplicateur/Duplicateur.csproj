@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="chargement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="chargement.Designer.cs">
+      <DependentUpon>chargement.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileManager.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -65,6 +71,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usb.cs" />
+    <EmbeddedResource Include="chargement.resx">
+      <DependentUpon>chargement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

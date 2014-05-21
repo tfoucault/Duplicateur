@@ -512,5 +512,6 @@ namespace Duplicateur
             //mise à jour paramétrage clé usb selectionnée
             currentUsb.setNotifMailAddress(textBoxMail.Text);
         }
+   
     }
 }
