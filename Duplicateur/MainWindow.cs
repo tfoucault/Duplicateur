@@ -80,18 +80,23 @@ namespace Duplicateur
             // Set the view to show details.
             listeClesUsb.View = View.Details;
             listeClesUsbFormatage.View = View.Details;
+            listViewEjection.View = View.Details;
             // Allow the user to rearrange columns.
             listeClesUsb.AllowColumnReorder = true;
             listeClesUsbFormatage.AllowColumnReorder = true;
+            listViewEjection.AllowColumnReorder = true;
             // Display check boxes.
             listeClesUsb.CheckBoxes = true;
             listeClesUsbFormatage.CheckBoxes = true;
+            listViewEjection.CheckBoxes = true;
             // Select the item and subitems when selection is made.
             listeClesUsb.FullRowSelect = true;
             listeClesUsbFormatage.FullRowSelect = true;
+            listViewEjection.FullRowSelect = true;
             // Sort the items in the list in ascending order.
             listeClesUsb.Sorting = SortOrder.Ascending;
             listeClesUsbFormatage.Sorting = SortOrder.Ascending;
+            listViewEjection.Sorting = SortOrder.Ascending;
 
             //Ajout des headers dans la liste view des cles usb
             listeClesUsb.Columns.Add("Racine", -2, HorizontalAlignment.Left);
@@ -99,11 +104,17 @@ namespace Duplicateur
             listeClesUsb.Columns.Add("Espace libre", -2, HorizontalAlignment.Left);
             listeClesUsb.Columns.Add("Format", -2, HorizontalAlignment.Center);
 
-            //Ajout des headers dans la liste view des cles usb
+            //Ajout des headers dans la liste view des cles usb formatage
             listeClesUsbFormatage.Columns.Add("Racine", -2, HorizontalAlignment.Left);
             listeClesUsbFormatage.Columns.Add("Espace total", -2, HorizontalAlignment.Left);
             listeClesUsbFormatage.Columns.Add("Espace libre", -2, HorizontalAlignment.Left);
             listeClesUsbFormatage.Columns.Add("Format", -2, HorizontalAlignment.Center);
+
+            //Ajout des headers dans la liste view des cles usb ejection
+            listViewEjection.Columns.Add("Racine", -2, HorizontalAlignment.Left);
+            listViewEjection.Columns.Add("Espace total", -2, HorizontalAlignment.Left);
+            listViewEjection.Columns.Add("Espace libre", -2, HorizontalAlignment.Left);
+            listViewEjection.Columns.Add("Format", -2, HorizontalAlignment.Center);
 
             List<DriveInfo> usbList = fileMgr.getUsbList();
 
@@ -133,6 +144,14 @@ namespace Duplicateur
                 item.SubItems.Add(usb.getFreeSpaceStr());
                 item.SubItems.Add(usb.getFormat());
                 listeClesUsbFormatage.Items.Add(item);
+
+                item = new ListViewItem();
+                item.Tag = di.Name;
+                item.Text = di.Name;
+                item.SubItems.Add(usb.getTotalSizeStr());
+                item.SubItems.Add(usb.getFreeSpaceStr());
+                item.SubItems.Add(usb.getFormat());
+                listViewEjection.Items.Add(item);
             }
         }
 
@@ -895,6 +914,108 @@ namespace Duplicateur
         private void tabPage2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkboxToutUsbEjection_CheckedChanged(object sender, EventArgs e)
+        {
+            Boolean selectionne;
+            if (this.checkboxToutUsbEjection.Checked)
+            {
+                selectionne = true;
+            }
+            else
+            {
+                selectionne = false;
+            }
+
+            foreach (ListViewItem i in this.listViewEjection.Items)
+            {
+                i.Checked = selectionne;
+            }
+        }
+
+        private void clickEjection_Click(object sender, EventArgs e)
+        {
+            Usb temp;
+            int compteur = 0;
+            Boolean erreur = false, tempErreur = false;
+            String messageErreur = "";
+            foreach (ListViewItem i in this.listViewEjection.Items)
+            {
+                if (i.Checked)
+                {
+                    temp = new Usb((Char)i.SubItems[0].Text.ToString()[0]);
+                    tempErreur = temp.EjectDrive();
+                    if (!tempErreur)
+                    {
+                        erreur = true;
+                        if (messageErreur != "")
+                        {
+                            messageErreur += " / ";
+                        }
+                        messageErreur += "Une erreur est survenu lors de l'éjection de la clé " + temp.driveLetter;
+                    }
+                    compteur++;
+                }
+            }
+            if (erreur)
+            {
+                affichageMessageEjection(0, messageErreur);
+            }
+            else if (compteur == 0)
+            {
+                affichageMessageEjection(1, "Veuillez sélectionner un périphérique");
+            }
+            else
+            {
+                affichageMessageEjection(2, "Ejection effectué avec succès");
+            }
+        }
+
+        private void affichageMessageEjection(int statut, String message)
+        {
+            //Erreur
+            if (statut != 0)
+            {
+                this.ejectionErreurImg.Location = new System.Drawing.Point(15, 264);
+                this.ejectionErreurMessage.Location = new System.Drawing.Point(43, 267);
+                this.ejectionErreurMessage.Visible = false;
+                this.ejectionErreurImg.Visible = false;
+            }
+            else
+            {
+                this.ejectionErreurMessage.Visible = true;
+                this.ejectionErreurImg.Visible = true;
+                this.ejectionErreurMessage.Text = message;
+            }
+            //Avertissement
+            if (statut == 1)
+            {
+                this.ejectionAvertissementImg.Location = new System.Drawing.Point(15, 264);
+                this.ejectionAvertissementMessage.Location = new System.Drawing.Point(43, 267);
+                this.ejectionAvertissementMessage.Visible = true;
+                this.ejectionAvertissementImg.Visible = true;
+                this.ejectionAvertissementMessage.Text = message;
+            }
+            else
+            {
+                this.ejectionAvertissementMessage.Visible = false;
+                this.ejectionAvertissementImg.Visible = false;
+            }
+            //Succes
+            if (statut == 2)
+            {
+                this.ejectionSuccesImg.Location = new System.Drawing.Point(15, 264);
+                this.ejectionSuccesMessage.Location = new System.Drawing.Point(43, 267);
+                this.ejectionSuccesMessage.Visible = true;
+                this.ejectionSuccesImg.Visible = true;
+                this.ejectionSuccesMessage.Text = message;
+            }
+            else
+            {
+                this.ejectionSuccesMessage.Visible = false;
+                this.ejectionSuccesImg.Visible = false;
+            }
         }
     }
 }

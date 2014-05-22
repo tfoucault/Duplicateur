@@ -133,7 +133,7 @@ namespace Duplicateur
             this.driveLetter = driveLetter;
         }
 
-        public void EjectDrive()
+        public Boolean EjectDrive()
         {
             string path = "\\\\.\\" + this.driveLetter + ":";
 
@@ -141,8 +141,7 @@ namespace Duplicateur
             Console.WriteLine(handle);
             if ((long)handle == -1)
             {
-                MessageBox.Show("Unable to open drive " + driveLetter);
-                return;
+                return false;
             }
 
             int dummy = 0;
@@ -152,7 +151,7 @@ namespace Duplicateur
 
             CloseHandle(handle);
 
-            MessageBox.Show("OK to remove drive.");
+            return true;
         }
         #region SetLabel
 

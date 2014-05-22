@@ -82,15 +82,15 @@
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
-            this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.pictureBox16 = new System.Windows.Forms.PictureBox();
-            this.pictureBox17 = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.ejectionAvertissementMessage = new System.Windows.Forms.Label();
+            this.ejectionAvertissementImg = new System.Windows.Forms.PictureBox();
+            this.ejectionSuccesMessage = new System.Windows.Forms.Label();
+            this.ejectionSuccesImg = new System.Windows.Forms.PictureBox();
+            this.ejectionErreurImg = new System.Windows.Forms.PictureBox();
+            this.ejectionErreurMessage = new System.Windows.Forms.Label();
+            this.clickEjection = new System.Windows.Forms.Button();
+            this.listViewEjection = new System.Windows.Forms.ListView();
+            this.checkboxToutUsbEjection = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -116,9 +116,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.formatageErreurImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ejectionAvertissementImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ejectionSuccesImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ejectionErreurImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -599,7 +599,6 @@
             "FAT",
             "FAT32",
             "exFAT"});
-            this.comboBoxFormatUsb.SelectedIndex = 0;
             this.comboBoxFormatUsb.Location = new System.Drawing.Point(464, 50);
             this.comboBoxFormatUsb.Name = "comboBoxFormatUsb";
             this.comboBoxFormatUsb.Size = new System.Drawing.Size(121, 21);
@@ -737,15 +736,15 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.White;
-            this.tabPage3.Controls.Add(this.label12);
-            this.tabPage3.Controls.Add(this.pictureBox15);
-            this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.pictureBox16);
-            this.tabPage3.Controls.Add(this.pictureBox17);
-            this.tabPage3.Controls.Add(this.label14);
-            this.tabPage3.Controls.Add(this.button2);
-            this.tabPage3.Controls.Add(this.listView2);
-            this.tabPage3.Controls.Add(this.checkBox1);
+            this.tabPage3.Controls.Add(this.ejectionAvertissementMessage);
+            this.tabPage3.Controls.Add(this.ejectionAvertissementImg);
+            this.tabPage3.Controls.Add(this.ejectionSuccesMessage);
+            this.tabPage3.Controls.Add(this.ejectionSuccesImg);
+            this.tabPage3.Controls.Add(this.ejectionErreurImg);
+            this.tabPage3.Controls.Add(this.ejectionErreurMessage);
+            this.tabPage3.Controls.Add(this.clickEjection);
+            this.tabPage3.Controls.Add(this.listViewEjection);
+            this.tabPage3.Controls.Add(this.checkboxToutUsbEjection);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.pictureBox10);
             this.tabPage3.Controls.Add(this.label2);
@@ -755,96 +754,104 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Ejecter les clés USB";
             // 
-            // label12
+            // ejectionAvertissementMessage
             // 
-            this.label12.AutoSize = true;
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label12.Location = new System.Drawing.Point(43, 328);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(87, 13);
-            this.label12.TabIndex = 114;
-            this.label12.Text = "Message d\'alerte";
+            this.ejectionAvertissementMessage.AutoSize = true;
+            this.ejectionAvertissementMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.ejectionAvertissementMessage.Location = new System.Drawing.Point(43, 328);
+            this.ejectionAvertissementMessage.Name = "ejectionAvertissementMessage";
+            this.ejectionAvertissementMessage.Size = new System.Drawing.Size(87, 13);
+            this.ejectionAvertissementMessage.TabIndex = 114;
+            this.ejectionAvertissementMessage.Text = "Message d\'alerte";
+            this.ejectionAvertissementMessage.Visible = false;
             // 
-            // pictureBox15
+            // ejectionAvertissementImg
             // 
-            this.pictureBox15.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox15.BackgroundImage")));
-            this.pictureBox15.Location = new System.Drawing.Point(15, 324);
-            this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox15.TabIndex = 113;
-            this.pictureBox15.TabStop = false;
+            this.ejectionAvertissementImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ejectionAvertissementImg.BackgroundImage")));
+            this.ejectionAvertissementImg.Location = new System.Drawing.Point(15, 324);
+            this.ejectionAvertissementImg.Name = "ejectionAvertissementImg";
+            this.ejectionAvertissementImg.Size = new System.Drawing.Size(22, 23);
+            this.ejectionAvertissementImg.TabIndex = 113;
+            this.ejectionAvertissementImg.TabStop = false;
+            this.ejectionAvertissementImg.Visible = false;
             // 
-            // label13
+            // ejectionSuccesMessage
             // 
-            this.label13.AutoSize = true;
-            this.label13.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label13.Location = new System.Drawing.Point(43, 297);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 13);
-            this.label13.TabIndex = 112;
-            this.label13.Text = "Message d\'alerte";
+            this.ejectionSuccesMessage.AutoSize = true;
+            this.ejectionSuccesMessage.ForeColor = System.Drawing.Color.ForestGreen;
+            this.ejectionSuccesMessage.Location = new System.Drawing.Point(43, 297);
+            this.ejectionSuccesMessage.Name = "ejectionSuccesMessage";
+            this.ejectionSuccesMessage.Size = new System.Drawing.Size(87, 13);
+            this.ejectionSuccesMessage.TabIndex = 112;
+            this.ejectionSuccesMessage.Text = "Message d\'alerte";
+            this.ejectionSuccesMessage.Visible = false;
             // 
-            // pictureBox16
+            // ejectionSuccesImg
             // 
-            this.pictureBox16.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox16.BackgroundImage")));
-            this.pictureBox16.Location = new System.Drawing.Point(15, 293);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox16.TabIndex = 111;
-            this.pictureBox16.TabStop = false;
+            this.ejectionSuccesImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ejectionSuccesImg.BackgroundImage")));
+            this.ejectionSuccesImg.Location = new System.Drawing.Point(15, 293);
+            this.ejectionSuccesImg.Name = "ejectionSuccesImg";
+            this.ejectionSuccesImg.Size = new System.Drawing.Size(22, 23);
+            this.ejectionSuccesImg.TabIndex = 111;
+            this.ejectionSuccesImg.TabStop = false;
+            this.ejectionSuccesImg.Visible = false;
             // 
-            // pictureBox17
+            // ejectionErreurImg
             // 
-            this.pictureBox17.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox17.BackgroundImage")));
-            this.pictureBox17.Location = new System.Drawing.Point(15, 264);
-            this.pictureBox17.Name = "pictureBox17";
-            this.pictureBox17.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox17.TabIndex = 110;
-            this.pictureBox17.TabStop = false;
+            this.ejectionErreurImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ejectionErreurImg.BackgroundImage")));
+            this.ejectionErreurImg.Location = new System.Drawing.Point(15, 264);
+            this.ejectionErreurImg.Name = "ejectionErreurImg";
+            this.ejectionErreurImg.Size = new System.Drawing.Size(22, 23);
+            this.ejectionErreurImg.TabIndex = 110;
+            this.ejectionErreurImg.TabStop = false;
+            this.ejectionErreurImg.Visible = false;
             // 
-            // label14
+            // ejectionErreurMessage
             // 
-            this.label14.AutoSize = true;
-            this.label14.ForeColor = System.Drawing.Color.IndianRed;
-            this.label14.Location = new System.Drawing.Point(43, 267);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(87, 13);
-            this.label14.TabIndex = 109;
-            this.label14.Text = "Message d\'alerte";
+            this.ejectionErreurMessage.AutoSize = true;
+            this.ejectionErreurMessage.ForeColor = System.Drawing.Color.IndianRed;
+            this.ejectionErreurMessage.Location = new System.Drawing.Point(43, 267);
+            this.ejectionErreurMessage.Name = "ejectionErreurMessage";
+            this.ejectionErreurMessage.Size = new System.Drawing.Size(87, 13);
+            this.ejectionErreurMessage.TabIndex = 109;
+            this.ejectionErreurMessage.Text = "Message d\'alerte";
+            this.ejectionErreurMessage.Visible = false;
             // 
-            // button2
+            // clickEjection
             // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(14, 211);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(431, 42);
-            this.button2.TabIndex = 108;
-            this.button2.Text = "EJECTER";
-            this.button2.UseVisualStyleBackColor = true;
+            this.clickEjection.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("clickEjection.BackgroundImage")));
+            this.clickEjection.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clickEjection.FlatAppearance.BorderSize = 0;
+            this.clickEjection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clickEjection.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clickEjection.ForeColor = System.Drawing.Color.White;
+            this.clickEjection.Location = new System.Drawing.Point(14, 211);
+            this.clickEjection.Name = "clickEjection";
+            this.clickEjection.Size = new System.Drawing.Size(431, 42);
+            this.clickEjection.TabIndex = 108;
+            this.clickEjection.Text = "EJECTER";
+            this.clickEjection.UseVisualStyleBackColor = true;
+            this.clickEjection.Click += new System.EventHandler(this.clickEjection_Click);
             // 
-            // listView2
+            // listViewEjection
             // 
-            this.listView2.Location = new System.Drawing.Point(14, 90);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(431, 97);
-            this.listView2.TabIndex = 107;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listViewEjection.Location = new System.Drawing.Point(14, 90);
+            this.listViewEjection.Name = "listViewEjection";
+            this.listViewEjection.Size = new System.Drawing.Size(431, 97);
+            this.listViewEjection.TabIndex = 107;
+            this.listViewEjection.UseCompatibleStateImageBehavior = false;
             // 
-            // checkBox1
+            // checkboxToutUsbEjection
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(223, 58);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(222, 18);
-            this.checkBox1.TabIndex = 106;
-            this.checkBox1.Text = "Sélectionner tous les périphériques";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkboxToutUsbEjection.AutoSize = true;
+            this.checkboxToutUsbEjection.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkboxToutUsbEjection.Location = new System.Drawing.Point(223, 58);
+            this.checkboxToutUsbEjection.Name = "checkboxToutUsbEjection";
+            this.checkboxToutUsbEjection.Size = new System.Drawing.Size(222, 18);
+            this.checkboxToutUsbEjection.TabIndex = 106;
+            this.checkboxToutUsbEjection.Text = "Sélectionner tous les périphériques";
+            this.checkboxToutUsbEjection.UseVisualStyleBackColor = true;
+            this.checkboxToutUsbEjection.CheckedChanged += new System.EventHandler(this.checkboxToutUsbEjection_CheckedChanged);
             // 
             // label1
             // 
@@ -964,9 +971,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ejectionAvertissementImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ejectionSuccesImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ejectionErreurImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -1026,9 +1033,9 @@
         private System.Windows.Forms.CheckBox checkboxToutUsbFormatage;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button clickFormatage;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button clickEjection;
+        private System.Windows.Forms.ListView listViewEjection;
+        private System.Windows.Forms.CheckBox checkboxToutUsbEjection;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Label label2;
@@ -1040,12 +1047,12 @@
         private System.Windows.Forms.PictureBox formatageSuccesImg;
         private System.Windows.Forms.PictureBox formatageErreurImg;
         private System.Windows.Forms.Label formatageErreurMessage;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.PictureBox pictureBox15;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.PictureBox pictureBox16;
-        private System.Windows.Forms.PictureBox pictureBox17;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label ejectionAvertissementMessage;
+        private System.Windows.Forms.PictureBox ejectionAvertissementImg;
+        private System.Windows.Forms.Label ejectionSuccesMessage;
+        private System.Windows.Forms.PictureBox ejectionSuccesImg;
+        private System.Windows.Forms.PictureBox ejectionErreurImg;
+        private System.Windows.Forms.Label ejectionErreurMessage;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ComboBox comboBoxFormatUsb;
     }
