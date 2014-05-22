@@ -1,0 +1,17 @@
+Activer le bouton 'Lancer copie' si : 
+	Au moins une clé selectionnée
+
+Avant de lancer la copie verifier : 
+	Que la destination contient assez de place dispo
+
+Erreurs possibles lors de la copie : 
+	Dossier source introuvable -> Erreur
+	Le dossier existe deja -> Alerte (Fusionner, Ignorer)
+	Le fichier existe deja -> Alerte (Copier et Remplacer, Ne pas copier, Copier et conserver les deux fichiers)
+	Le nom de fichier est trop long (Ignorer ou Renommer le fichier)
+	
+	
+Optimiser le calcul de la taille des fichiers à copier
+
+Ejecter les clés après la copie si réussite
+Retenter la copie ou abandonner si echec

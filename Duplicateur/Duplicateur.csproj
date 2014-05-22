@@ -11,6 +11,21 @@
     <AssemblyName>Duplicateur</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>publier\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,11 +70,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="chargement.cs">
+    <Compile Include="Chargement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="chargement.Designer.cs">
-      <DependentUpon>chargement.cs</DependentUpon>
+    <Compile Include="Chargement.Designer.cs">
+      <DependentUpon>Chargement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DriveDetector.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="FileManager.cs" />
     <Compile Include="MainWindow.cs">
@@ -71,8 +89,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usb.cs" />
-    <EmbeddedResource Include="chargement.resx">
-      <DependentUpon>chargement.cs</DependentUpon>
+    <EmbeddedResource Include="Chargement.resx">
+      <DependentUpon>Chargement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -86,7 +104,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Images\Thumbs.db" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -99,32 +116,26 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\1.png" />
-    <Content Include="Images\2.png" />
-    <Content Include="Images\3.png" />
-    <Content Include="Images\adv.png" />
-    <Content Include="Images\adv_2.png" />
-    <Content Include="Images\bg_big_button.png" />
-    <Content Include="Images\bg_big_button_hover.png" />
-    <Content Include="Images\bg_button.png" />
-    <Content Include="Images\bg_button_delete.png" />
-    <Content Include="Images\bg_button_delete_2.png" />
-    <Content Include="Images\bg_button_delete_2_hover.png" />
-    <Content Include="Images\bg_button_hover.png" />
-    <Content Include="Images\bg_button_hover_progress.png" />
-    <Content Include="Images\bg_button_progress.png" />
-    <Content Include="Images\bg_input.png" />
-    <Content Include="Images\choice.png" />
-    <Content Include="Images\choice_hover.png" />
-    <Content Include="Images\choice_progress.png" />
-    <Content Include="Images\false.png" />
-    <Content Include="Images\false_2.png" />
-    <Content Include="Images\G4.jpg" />
-    <Content Include="Images\header.png" />
-    <Content Include="Images\header_2.png" />
-    <Content Include="Images\trait.jpg" />
-    <Content Include="Images\true.png" />
-    <Content Include="Images\true_2.png" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 et x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

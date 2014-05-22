@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dolinay;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,14 +35,20 @@ namespace Duplicateur
         private long selectionSize = -1;
         private List<String> selectionPaths = new List<String>();
 
-        private Thread selectionSizeThread = null;
+        //private Thread selectionSizeThread = null;
         private volatile bool selectionListeUpdated = false;
+
+        private DriveDetector driveDetector = null;
 
         public MainWindow()
         {
             InitializeComponent();
             initListSelection();
             initListClesUsb();
+            driveDetector = new DriveDetector();
+            driveDetector.DeviceArrived += new DriveDetectorEventHandler(OnDriveArrived);
+            driveDetector.DeviceRemoved += new DriveDetectorEventHandler(OnDriveRemoved);
+            driveDetector.QueryRemove += new DriveDetectorEventHandler(OnQueryRemove);
         }
 
         /*Fonction d'initialisation de la liste de selection
@@ -134,8 +141,6 @@ namespace Duplicateur
                 item.SubItems.Add(usb.getFreeSpaceStr());
                 item.SubItems.Add(usb.getFormat());
 
-
-
                 listeClesUsb.Items.Add(item);
                 item = new ListViewItem();
                 item.Tag = di.Name;
@@ -191,6 +196,9 @@ namespace Duplicateur
                 {
                     lvg = (ListViewGroup)groups[root.FullName];
                 }
+
+                //On tague le group comme dossier
+                lvg.Tag = "Folder";
 
                 //On recupère les sous dossiers
                 DirectoryInfo[] dil = root.GetDirectories();
@@ -285,7 +293,6 @@ namespace Duplicateur
                 //Pour chaque element retourne
                 foreach (String file in selectedFiles)
                 {
-
                     //On crée un objet d'informations sur le fichier
                     FileInfo fi = new FileInfo(file);
 
@@ -300,11 +307,12 @@ namespace Duplicateur
                         //On prépare un group d'item pour la selection
                         ListViewGroup lvg;
 
-                        //Si le group n'existe pas déja
+                        //Si le groupe n'existe pas déja
                         if (!groups.Contains(fi.Directory.FullName))
                         {
                             //On ajoute le groupe à la liste view
                             lvg = new ListViewGroup(fi.Directory.Name);
+                            lvg.Tag = "Files";
                             listeSelection.Groups.Add(lvg);
 
                             //On ajoute le groupe au hashtable
@@ -752,61 +760,118 @@ namespace Duplicateur
             }
 
             /**********************************************************************/
+            //Verification des adresses email renseignées pour les clés selectionnées
 
-            //On démarre la copie
-            MessageBox.Show("Demarrage de la copie");
-        }
+            bool validEmails = true;
 
-        /*Fonction qui permet de copier recursivement des dossiers 
-         * */
-        private void directoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
-        {
-            // Get the subdirectories for the specified directory.
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-            DirectoryInfo[] dirs = dir.GetDirectories();
-
-            if (!dir.Exists)
+            //Pour chaque clé, on vérifie le mail
+            foreach (string key in usbList.Keys)
             {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
-            }
+                Usb usb = (Usb)usbList[key];
 
-            // If the destination directory doesn't exist, create it. 
-            if (!Directory.Exists(destDirName))
-            {
-                Directory.CreateDirectory(destDirName);
-            }
-
-            // Get the files in the directory and copy them to the new location.
-            FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
-            {
-                //try
-                //{
-                string temppath = Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, false);
-                //}
-                //catch (Exception e)
-                //{
-                //MessageBox.Show(e.Message);
-                //}
-            }
-
-            // If copying subdirectories, copy them and their contents to new location. 
-            if (copySubDirs)
-            {
-                foreach (DirectoryInfo subdir in dirs)
+                //Si envoi de mail activé
+                if (usb.sendNotification)
                 {
-                    string temppath = Path.Combine(destDirName, subdir.Name);
-                    directoryCopy(subdir.FullName, temppath, copySubDirs);
+                    string email = usb.getNotifMailAddress();
+
+                    if((email.Length == 0) || !isValidEmail(email))
+                    {
+                        validEmails = false;
+                        errorMessage += "Email invalide pour la clé " + usb.driveLetter + "\n";
+                    }
                 }
             }
+
+            if (!validEmails)
+            {
+                MessageBox.Show(errorMessage);
+                return;
+            }
+
+            /**********************************************************************/
+
+            //Si la copie est possible, on crée une nouvelle fenetre de chargement
+            //et on initialise avec la liste des fichiers et des destinations
+            MessageBox.Show("Demarrage de la copie");
+
+            //On récupere la liste des chemin à copier
+            Hashtable groupList = new Hashtable();
+
+            foreach (ListViewGroup group in listeSelection.Groups)
+            {
+                String groupFolder = group.Header;
+
+                List<String> pathList = new List<String>();
+
+                foreach (ListViewItem item in group.Items)
+                {
+                    pathList.Add(item.Tag.ToString());
+                }
+
+                groupList.Add(groupFolder, pathList);
+            }
+
+            //On recupère la liste des usb cochés
+            List<Usb> usbChecked = new List<Usb>();
+
+            foreach (string key in usbList.Keys)
+            {
+                //On récupere le usb en cours
+                Usb usb = (Usb)usbList[key];
+
+                //Si l'usb est coché
+                if (usb.isSelected)
+                {
+                    //On l'ajoute à la liste
+                    usbChecked.Add(usb);
+                }
+            }
+
+            //On transmet la liste des fichier et clés à la fenetre de copy
+            Chargement copyWindow = new Chargement(groupList, usbChecked);
+
+            //On affiche la fenetre modale
+            copyWindow.ShowDialog();
         }
 
-        /*Fonction qui permet de copier toute la liste de fichier et dossier selectionnés
-         * */
-        private void processCopy()
+        // Called by DriveDetector when removable device in inserted 
+        private void OnDriveArrived(object sender, DriveDetectorEventArgs e)
+        {
+
+            DriveInfo di = new DriveInfo(e.Drive);
+            string usbName = e.Drive.Substring(0, 1);
+            char usbLetter = usbName[0];
+            Usb usb = new Usb(usbLetter);
+            usbList.Add(e.Drive, usb);
+            ListViewItem item = new ListViewItem();
+            item.Tag = di.Name;
+            item.Text = di.Name;
+            item.SubItems.Add(usb.getTotalSizeStr());
+            item.SubItems.Add(usb.getFreeSpaceStr());
+            item.SubItems.Add(usb.getFormat());
+            listeClesUsb.Items.Add(item);
+            
+        }
+
+        // Called by DriveDetector after removable device has been unpluged 
+        private void OnDriveRemoved(object sender, DriveDetectorEventArgs e)
+        {
+            // TODO: do clean up here, etc. Letter of the removed drive is in e.Drive;
+            //On supprime la cle de la hashtable
+            usbList.Remove(e.Drive);
+
+            int index = 0;
+
+            for (int i = 0; i < listeClesUsb.Items.Count; ++i)
+            {
+                if (listeClesUsb.Items[i].Tag.ToString() == e.Drive) index = i;
+            }
+
+            listeClesUsb.Items.RemoveAt(index);
+        }
+
+        // Called by DriveDetector when removable drive is about to be removed
+        private void OnQueryRemove(object sender, DriveDetectorEventArgs e)
         {
         }
 
@@ -911,11 +976,6 @@ namespace Duplicateur
             }
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void checkboxToutUsbEjection_CheckedChanged(object sender, EventArgs e)
         {
             Boolean selectionne;
@@ -1018,14 +1078,12 @@ namespace Duplicateur
             }
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private bool isValidEmail(string email)
         {
-
-        }
-
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-
+            //Verifier l'adresse mail valide
+            string strPattern = "^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
+            
+            return System.Text.RegularExpressions.Regex.IsMatch(email, strPattern);
         }
     }
 }

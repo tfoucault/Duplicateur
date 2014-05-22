@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Duplicateur
 {
-    class Usb {
+    public class Usb {
         private const int INVALID_HANDLE_VALUE = -1;
         private const int GENERIC_READ = unchecked((int)0x80000000);
         private const int GENERIC_WRITE = unchecked((int)0x40000000);
