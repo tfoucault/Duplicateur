@@ -68,6 +68,7 @@
             this.textBoxMail = new System.Windows.Forms.TextBox();
             this.labelNotification = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.comboBoxFormatUsb = new System.Windows.Forms.ComboBox();
             this.formatageAvertissementMessage = new System.Windows.Forms.Label();
             this.formatageAvertissementImg = new System.Windows.Forms.PictureBox();
@@ -184,7 +185,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(304, 442);
+            this.label8.Location = new System.Drawing.Point(306, 443);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(100, 15);
             this.label8.TabIndex = 104;
@@ -193,7 +194,7 @@
             // pictureBox11
             // 
             this.pictureBox11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox11.BackgroundImage")));
-            this.pictureBox11.Location = new System.Drawing.Point(276, 438);
+            this.pictureBox11.Location = new System.Drawing.Point(278, 439);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(22, 23);
             this.pictureBox11.TabIndex = 103;
@@ -267,20 +268,22 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label4.Location = new System.Drawing.Point(173, 442);
+            this.label4.Location = new System.Drawing.Point(172, 443);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 15);
             this.label4.TabIndex = 95;
             this.label4.Text = "Message d\'alerte";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // pictureBox5
             // 
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
-            this.pictureBox5.Location = new System.Drawing.Point(145, 438);
+            this.pictureBox5.Location = new System.Drawing.Point(144, 439);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(22, 23);
             this.pictureBox5.TabIndex = 94;
             this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
             // 
             // pictureBox4
             // 
@@ -570,6 +573,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.comboBoxFormatUsb);
             this.tabPage2.Controls.Add(this.formatageAvertissementMessage);
             this.tabPage2.Controls.Add(this.formatageAvertissementImg);
@@ -591,6 +595,16 @@
             this.tabPage2.Text = "Formater les clés USB";
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(12, 58);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(45, 14);
+            this.label9.TabIndex = 112;
+            this.label9.Text = "Format";
+            // 
             // comboBoxFormatUsb
             // 
             this.comboBoxFormatUsb.FormattingEnabled = true;
@@ -599,17 +613,16 @@
             "FAT",
             "FAT32",
             "exFAT"});
-            this.comboBoxFormatUsb.SelectedIndex = 0;
-            this.comboBoxFormatUsb.Location = new System.Drawing.Point(464, 50);
+            this.comboBoxFormatUsb.Location = new System.Drawing.Point(233, 55);
             this.comboBoxFormatUsb.Name = "comboBoxFormatUsb";
-            this.comboBoxFormatUsb.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFormatUsb.Size = new System.Drawing.Size(216, 21);
             this.comboBoxFormatUsb.TabIndex = 111;
             // 
             // formatageAvertissementMessage
             // 
             this.formatageAvertissementMessage.AutoSize = true;
             this.formatageAvertissementMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.formatageAvertissementMessage.Location = new System.Drawing.Point(44, 327);
+            this.formatageAvertissementMessage.Location = new System.Drawing.Point(44, 337);
             this.formatageAvertissementMessage.Name = "formatageAvertissementMessage";
             this.formatageAvertissementMessage.Size = new System.Drawing.Size(87, 13);
             this.formatageAvertissementMessage.TabIndex = 110;
@@ -619,7 +632,7 @@
             // formatageAvertissementImg
             // 
             this.formatageAvertissementImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("formatageAvertissementImg.BackgroundImage")));
-            this.formatageAvertissementImg.Location = new System.Drawing.Point(16, 323);
+            this.formatageAvertissementImg.Location = new System.Drawing.Point(16, 333);
             this.formatageAvertissementImg.Name = "formatageAvertissementImg";
             this.formatageAvertissementImg.Size = new System.Drawing.Size(22, 23);
             this.formatageAvertissementImg.TabIndex = 109;
@@ -630,7 +643,7 @@
             // 
             this.formatageSuccesMessage.AutoSize = true;
             this.formatageSuccesMessage.ForeColor = System.Drawing.Color.ForestGreen;
-            this.formatageSuccesMessage.Location = new System.Drawing.Point(44, 296);
+            this.formatageSuccesMessage.Location = new System.Drawing.Point(44, 306);
             this.formatageSuccesMessage.Name = "formatageSuccesMessage";
             this.formatageSuccesMessage.Size = new System.Drawing.Size(87, 13);
             this.formatageSuccesMessage.TabIndex = 108;
@@ -640,7 +653,7 @@
             // formatageSuccesImg
             // 
             this.formatageSuccesImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("formatageSuccesImg.BackgroundImage")));
-            this.formatageSuccesImg.Location = new System.Drawing.Point(16, 292);
+            this.formatageSuccesImg.Location = new System.Drawing.Point(16, 302);
             this.formatageSuccesImg.Name = "formatageSuccesImg";
             this.formatageSuccesImg.Size = new System.Drawing.Size(22, 23);
             this.formatageSuccesImg.TabIndex = 107;
@@ -650,7 +663,7 @@
             // formatageErreurImg
             // 
             this.formatageErreurImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("formatageErreurImg.BackgroundImage")));
-            this.formatageErreurImg.Location = new System.Drawing.Point(16, 263);
+            this.formatageErreurImg.Location = new System.Drawing.Point(16, 273);
             this.formatageErreurImg.Name = "formatageErreurImg";
             this.formatageErreurImg.Size = new System.Drawing.Size(22, 23);
             this.formatageErreurImg.TabIndex = 106;
@@ -661,7 +674,7 @@
             // 
             this.formatageErreurMessage.AutoSize = true;
             this.formatageErreurMessage.ForeColor = System.Drawing.Color.IndianRed;
-            this.formatageErreurMessage.Location = new System.Drawing.Point(44, 266);
+            this.formatageErreurMessage.Location = new System.Drawing.Point(44, 276);
             this.formatageErreurMessage.Name = "formatageErreurMessage";
             this.formatageErreurMessage.Size = new System.Drawing.Size(87, 13);
             this.formatageErreurMessage.TabIndex = 105;
@@ -675,20 +688,20 @@
             this.clickFormatage.FlatAppearance.BorderSize = 0;
             this.clickFormatage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clickFormatage.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clickFormatage.ForeColor = System.Drawing.Color.White;
-            this.clickFormatage.Location = new System.Drawing.Point(15, 210);
+            this.clickFormatage.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.clickFormatage.Location = new System.Drawing.Point(15, 225);
             this.clickFormatage.Name = "clickFormatage";
-            this.clickFormatage.Size = new System.Drawing.Size(431, 42);
+            this.clickFormatage.Size = new System.Drawing.Size(434, 37);
             this.clickFormatage.TabIndex = 104;
-            this.clickFormatage.Text = "LANCER LE FORMATAGE";
+            this.clickFormatage.Text = "Lancer le formatage";
             this.clickFormatage.UseVisualStyleBackColor = true;
             this.clickFormatage.Click += new System.EventHandler(this.clickFormatage_Click);
             // 
             // listeClesUsbFormatage
             // 
-            this.listeClesUsbFormatage.Location = new System.Drawing.Point(15, 89);
+            this.listeClesUsbFormatage.Location = new System.Drawing.Point(15, 122);
             this.listeClesUsbFormatage.Name = "listeClesUsbFormatage";
-            this.listeClesUsbFormatage.Size = new System.Drawing.Size(431, 97);
+            this.listeClesUsbFormatage.Size = new System.Drawing.Size(434, 97);
             this.listeClesUsbFormatage.TabIndex = 103;
             this.listeClesUsbFormatage.UseCompatibleStateImageBehavior = false;
             // 
@@ -696,7 +709,7 @@
             // 
             this.checkboxToutUsbFormatage.AutoSize = true;
             this.checkboxToutUsbFormatage.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkboxToutUsbFormatage.Location = new System.Drawing.Point(224, 57);
+            this.checkboxToutUsbFormatage.Location = new System.Drawing.Point(233, 89);
             this.checkboxToutUsbFormatage.Name = "checkboxToutUsbFormatage";
             this.checkboxToutUsbFormatage.Size = new System.Drawing.Size(222, 18);
             this.checkboxToutUsbFormatage.TabIndex = 102;
@@ -708,11 +721,11 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(12, 57);
+            this.label7.Location = new System.Drawing.Point(12, 90);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(131, 14);
+            this.label7.Size = new System.Drawing.Size(137, 14);
             this.label7.TabIndex = 101;
-            this.label7.Text = "Support de destination";
+            this.label7.Text = "Liste des périphériques";
             // 
             // pictureBox9
             // 
@@ -730,9 +743,9 @@
             this.label6.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(43, 17);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(263, 19);
+            this.label6.Size = new System.Drawing.Size(197, 19);
             this.label6.TabIndex = 98;
-            this.label6.Text = "Sélection des supports de destination";
+            this.label6.Text = "Sélection des périphériques";
             // 
             // tabPage3
             // 
@@ -759,7 +772,7 @@
             // 
             this.ejectionAvertissementMessage.AutoSize = true;
             this.ejectionAvertissementMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.ejectionAvertissementMessage.Location = new System.Drawing.Point(43, 328);
+            this.ejectionAvertissementMessage.Location = new System.Drawing.Point(42, 309);
             this.ejectionAvertissementMessage.Name = "ejectionAvertissementMessage";
             this.ejectionAvertissementMessage.Size = new System.Drawing.Size(87, 13);
             this.ejectionAvertissementMessage.TabIndex = 114;
@@ -769,7 +782,7 @@
             // ejectionAvertissementImg
             // 
             this.ejectionAvertissementImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ejectionAvertissementImg.BackgroundImage")));
-            this.ejectionAvertissementImg.Location = new System.Drawing.Point(15, 324);
+            this.ejectionAvertissementImg.Location = new System.Drawing.Point(14, 305);
             this.ejectionAvertissementImg.Name = "ejectionAvertissementImg";
             this.ejectionAvertissementImg.Size = new System.Drawing.Size(22, 23);
             this.ejectionAvertissementImg.TabIndex = 113;
@@ -780,7 +793,7 @@
             // 
             this.ejectionSuccesMessage.AutoSize = true;
             this.ejectionSuccesMessage.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ejectionSuccesMessage.Location = new System.Drawing.Point(43, 297);
+            this.ejectionSuccesMessage.Location = new System.Drawing.Point(42, 278);
             this.ejectionSuccesMessage.Name = "ejectionSuccesMessage";
             this.ejectionSuccesMessage.Size = new System.Drawing.Size(87, 13);
             this.ejectionSuccesMessage.TabIndex = 112;
@@ -790,7 +803,7 @@
             // ejectionSuccesImg
             // 
             this.ejectionSuccesImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ejectionSuccesImg.BackgroundImage")));
-            this.ejectionSuccesImg.Location = new System.Drawing.Point(15, 293);
+            this.ejectionSuccesImg.Location = new System.Drawing.Point(14, 274);
             this.ejectionSuccesImg.Name = "ejectionSuccesImg";
             this.ejectionSuccesImg.Size = new System.Drawing.Size(22, 23);
             this.ejectionSuccesImg.TabIndex = 111;
@@ -800,7 +813,7 @@
             // ejectionErreurImg
             // 
             this.ejectionErreurImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ejectionErreurImg.BackgroundImage")));
-            this.ejectionErreurImg.Location = new System.Drawing.Point(15, 264);
+            this.ejectionErreurImg.Location = new System.Drawing.Point(14, 245);
             this.ejectionErreurImg.Name = "ejectionErreurImg";
             this.ejectionErreurImg.Size = new System.Drawing.Size(22, 23);
             this.ejectionErreurImg.TabIndex = 110;
@@ -811,7 +824,7 @@
             // 
             this.ejectionErreurMessage.AutoSize = true;
             this.ejectionErreurMessage.ForeColor = System.Drawing.Color.IndianRed;
-            this.ejectionErreurMessage.Location = new System.Drawing.Point(43, 267);
+            this.ejectionErreurMessage.Location = new System.Drawing.Point(42, 248);
             this.ejectionErreurMessage.Name = "ejectionErreurMessage";
             this.ejectionErreurMessage.Size = new System.Drawing.Size(87, 13);
             this.ejectionErreurMessage.TabIndex = 109;
@@ -825,12 +838,12 @@
             this.clickEjection.FlatAppearance.BorderSize = 0;
             this.clickEjection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.clickEjection.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clickEjection.ForeColor = System.Drawing.Color.White;
-            this.clickEjection.Location = new System.Drawing.Point(14, 211);
+            this.clickEjection.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.clickEjection.Location = new System.Drawing.Point(14, 193);
             this.clickEjection.Name = "clickEjection";
-            this.clickEjection.Size = new System.Drawing.Size(431, 42);
+            this.clickEjection.Size = new System.Drawing.Size(434, 37);
             this.clickEjection.TabIndex = 108;
-            this.clickEjection.Text = "EJECTER";
+            this.clickEjection.Text = "Ejecter";
             this.clickEjection.UseVisualStyleBackColor = true;
             this.clickEjection.Click += new System.EventHandler(this.clickEjection_Click);
             // 
@@ -838,7 +851,7 @@
             // 
             this.listViewEjection.Location = new System.Drawing.Point(14, 90);
             this.listViewEjection.Name = "listViewEjection";
-            this.listViewEjection.Size = new System.Drawing.Size(431, 97);
+            this.listViewEjection.Size = new System.Drawing.Size(434, 97);
             this.listViewEjection.TabIndex = 107;
             this.listViewEjection.UseCompatibleStateImageBehavior = false;
             // 
@@ -846,7 +859,7 @@
             // 
             this.checkboxToutUsbEjection.AutoSize = true;
             this.checkboxToutUsbEjection.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkboxToutUsbEjection.Location = new System.Drawing.Point(223, 58);
+            this.checkboxToutUsbEjection.Location = new System.Drawing.Point(233, 57);
             this.checkboxToutUsbEjection.Name = "checkboxToutUsbEjection";
             this.checkboxToutUsbEjection.Size = new System.Drawing.Size(222, 18);
             this.checkboxToutUsbEjection.TabIndex = 106;
@@ -1056,6 +1069,7 @@
         private System.Windows.Forms.Label ejectionErreurMessage;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ComboBox comboBoxFormatUsb;
+        private System.Windows.Forms.Label label9;
     }
 }
 

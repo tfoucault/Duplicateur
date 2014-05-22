@@ -86,6 +86,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Images\Thumbs.db" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -96,6 +97,34 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\1.png" />
+    <Content Include="Images\2.png" />
+    <Content Include="Images\3.png" />
+    <Content Include="Images\adv.png" />
+    <Content Include="Images\adv_2.png" />
+    <Content Include="Images\bg_big_button.png" />
+    <Content Include="Images\bg_big_button_hover.png" />
+    <Content Include="Images\bg_button.png" />
+    <Content Include="Images\bg_button_delete.png" />
+    <Content Include="Images\bg_button_delete_2.png" />
+    <Content Include="Images\bg_button_delete_2_hover.png" />
+    <Content Include="Images\bg_button_hover.png" />
+    <Content Include="Images\bg_button_hover_progress.png" />
+    <Content Include="Images\bg_button_progress.png" />
+    <Content Include="Images\bg_input.png" />
+    <Content Include="Images\choice.png" />
+    <Content Include="Images\choice_hover.png" />
+    <Content Include="Images\choice_progress.png" />
+    <Content Include="Images\false.png" />
+    <Content Include="Images\false_2.png" />
+    <Content Include="Images\G4.jpg" />
+    <Content Include="Images\header.png" />
+    <Content Include="Images\header_2.png" />
+    <Content Include="Images\trait.jpg" />
+    <Content Include="Images\true.png" />
+    <Content Include="Images\true_2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
