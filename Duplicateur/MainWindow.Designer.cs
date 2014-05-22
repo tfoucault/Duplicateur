@@ -599,6 +599,7 @@
             "FAT",
             "FAT32",
             "exFAT"});
+            this.comboBoxFormatUsb.SelectedIndex = 0;
             this.comboBoxFormatUsb.Location = new System.Drawing.Point(464, 50);
             this.comboBoxFormatUsb.Name = "comboBoxFormatUsb";
             this.comboBoxFormatUsb.Size = new System.Drawing.Size(121, 21);
