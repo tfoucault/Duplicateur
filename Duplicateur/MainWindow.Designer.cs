@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.buttonLancerCopie = new System.Windows.Forms.Button();
@@ -67,15 +68,16 @@
             this.textBoxMail = new System.Windows.Forms.TextBox();
             this.labelNotification = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.comboBoxFormatUsb = new System.Windows.Forms.ComboBox();
+            this.formatageAvertissementMessage = new System.Windows.Forms.Label();
+            this.formatageAvertissementImg = new System.Windows.Forms.PictureBox();
+            this.formatageSuccesMessage = new System.Windows.Forms.Label();
+            this.formatageSuccesImg = new System.Windows.Forms.PictureBox();
+            this.formatageErreurImg = new System.Windows.Forms.PictureBox();
+            this.formatageErreurMessage = new System.Windows.Forms.Label();
+            this.clickFormatage = new System.Windows.Forms.Button();
+            this.listeClesUsbFormatage = new System.Windows.Forms.ListView();
+            this.checkboxToutUsbFormatage = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -97,7 +99,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
@@ -110,9 +111,9 @@
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formatageAvertissementImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formatageSuccesImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formatageErreurImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
@@ -170,6 +171,14 @@
             this.tabPage1.Size = new System.Drawing.Size(949, 544);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dubliquer du contenu";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 468);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(431, 67);
+            this.richTextBox1.TabIndex = 105;
+            this.richTextBox1.Text = "";
             // 
             // label8
             // 
@@ -561,15 +570,16 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.pictureBox12);
-            this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.pictureBox13);
-            this.tabPage2.Controls.Add(this.pictureBox14);
-            this.tabPage2.Controls.Add(this.label11);
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.listView1);
-            this.tabPage2.Controls.Add(this.checkBox3);
+            this.tabPage2.Controls.Add(this.comboBoxFormatUsb);
+            this.tabPage2.Controls.Add(this.formatageAvertissementMessage);
+            this.tabPage2.Controls.Add(this.formatageAvertissementImg);
+            this.tabPage2.Controls.Add(this.formatageSuccesMessage);
+            this.tabPage2.Controls.Add(this.formatageSuccesImg);
+            this.tabPage2.Controls.Add(this.formatageErreurImg);
+            this.tabPage2.Controls.Add(this.formatageErreurMessage);
+            this.tabPage2.Controls.Add(this.clickFormatage);
+            this.tabPage2.Controls.Add(this.listeClesUsbFormatage);
+            this.tabPage2.Controls.Add(this.checkboxToutUsbFormatage);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.pictureBox9);
             this.tabPage2.Controls.Add(this.label6);
@@ -579,97 +589,120 @@
             this.tabPage2.Size = new System.Drawing.Size(949, 544);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Formater les clés USB";
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
-            // label9
+            // comboBoxFormatUsb
             // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label9.Location = new System.Drawing.Point(44, 327);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 13);
-            this.label9.TabIndex = 110;
-            this.label9.Text = "Message d\'alerte";
+            this.comboBoxFormatUsb.FormattingEnabled = true;
+            this.comboBoxFormatUsb.Items.AddRange(new object[] {
+            "NTFS",
+            "FAT",
+            "FAT32",
+            "exFAT"});
+            this.comboBoxFormatUsb.SelectedIndex = 0;
+            this.comboBoxFormatUsb.Location = new System.Drawing.Point(464, 50);
+            this.comboBoxFormatUsb.Name = "comboBoxFormatUsb";
+            this.comboBoxFormatUsb.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFormatUsb.TabIndex = 111;
             // 
-            // pictureBox12
+            // formatageAvertissementMessage
             // 
-            this.pictureBox12.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox12.BackgroundImage")));
-            this.pictureBox12.Location = new System.Drawing.Point(16, 323);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox12.TabIndex = 109;
-            this.pictureBox12.TabStop = false;
+            this.formatageAvertissementMessage.AutoSize = true;
+            this.formatageAvertissementMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.formatageAvertissementMessage.Location = new System.Drawing.Point(44, 327);
+            this.formatageAvertissementMessage.Name = "formatageAvertissementMessage";
+            this.formatageAvertissementMessage.Size = new System.Drawing.Size(87, 13);
+            this.formatageAvertissementMessage.TabIndex = 110;
+            this.formatageAvertissementMessage.Text = "Message d\'alerte";
+            this.formatageAvertissementMessage.Visible = false;
             // 
-            // label10
+            // formatageAvertissementImg
             // 
-            this.label10.AutoSize = true;
-            this.label10.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label10.Location = new System.Drawing.Point(44, 296);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 13);
-            this.label10.TabIndex = 108;
-            this.label10.Text = "Message d\'alerte";
+            this.formatageAvertissementImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("formatageAvertissementImg.BackgroundImage")));
+            this.formatageAvertissementImg.Location = new System.Drawing.Point(16, 323);
+            this.formatageAvertissementImg.Name = "formatageAvertissementImg";
+            this.formatageAvertissementImg.Size = new System.Drawing.Size(22, 23);
+            this.formatageAvertissementImg.TabIndex = 109;
+            this.formatageAvertissementImg.TabStop = false;
+            this.formatageAvertissementImg.Visible = false;
             // 
-            // pictureBox13
+            // formatageSuccesMessage
             // 
-            this.pictureBox13.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox13.BackgroundImage")));
-            this.pictureBox13.Location = new System.Drawing.Point(16, 292);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox13.TabIndex = 107;
-            this.pictureBox13.TabStop = false;
+            this.formatageSuccesMessage.AutoSize = true;
+            this.formatageSuccesMessage.ForeColor = System.Drawing.Color.ForestGreen;
+            this.formatageSuccesMessage.Location = new System.Drawing.Point(44, 296);
+            this.formatageSuccesMessage.Name = "formatageSuccesMessage";
+            this.formatageSuccesMessage.Size = new System.Drawing.Size(87, 13);
+            this.formatageSuccesMessage.TabIndex = 108;
+            this.formatageSuccesMessage.Text = "Message d\'alerte";
+            this.formatageSuccesMessage.Visible = false;
             // 
-            // pictureBox14
+            // formatageSuccesImg
             // 
-            this.pictureBox14.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox14.BackgroundImage")));
-            this.pictureBox14.Location = new System.Drawing.Point(16, 263);
-            this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox14.TabIndex = 106;
-            this.pictureBox14.TabStop = false;
+            this.formatageSuccesImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("formatageSuccesImg.BackgroundImage")));
+            this.formatageSuccesImg.Location = new System.Drawing.Point(16, 292);
+            this.formatageSuccesImg.Name = "formatageSuccesImg";
+            this.formatageSuccesImg.Size = new System.Drawing.Size(22, 23);
+            this.formatageSuccesImg.TabIndex = 107;
+            this.formatageSuccesImg.TabStop = false;
+            this.formatageSuccesImg.Visible = false;
             // 
-            // label11
+            // formatageErreurImg
             // 
-            this.label11.AutoSize = true;
-            this.label11.ForeColor = System.Drawing.Color.IndianRed;
-            this.label11.Location = new System.Drawing.Point(44, 266);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 13);
-            this.label11.TabIndex = 105;
-            this.label11.Text = "Message d\'alerte";
+            this.formatageErreurImg.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("formatageErreurImg.BackgroundImage")));
+            this.formatageErreurImg.Location = new System.Drawing.Point(16, 263);
+            this.formatageErreurImg.Name = "formatageErreurImg";
+            this.formatageErreurImg.Size = new System.Drawing.Size(22, 23);
+            this.formatageErreurImg.TabIndex = 106;
+            this.formatageErreurImg.TabStop = false;
+            this.formatageErreurImg.Visible = false;
             // 
-            // button1
+            // formatageErreurMessage
             // 
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(15, 210);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(431, 42);
-            this.button1.TabIndex = 104;
-            this.button1.Text = "LANCER LE FORMATAGE";
-            this.button1.UseVisualStyleBackColor = true;
+            this.formatageErreurMessage.AutoSize = true;
+            this.formatageErreurMessage.ForeColor = System.Drawing.Color.IndianRed;
+            this.formatageErreurMessage.Location = new System.Drawing.Point(44, 266);
+            this.formatageErreurMessage.Name = "formatageErreurMessage";
+            this.formatageErreurMessage.Size = new System.Drawing.Size(87, 13);
+            this.formatageErreurMessage.TabIndex = 105;
+            this.formatageErreurMessage.Text = "Message d\'alerte";
+            this.formatageErreurMessage.Visible = false;
             // 
-            // listView1
+            // clickFormatage
             // 
-            this.listView1.Location = new System.Drawing.Point(15, 89);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(431, 97);
-            this.listView1.TabIndex = 103;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.clickFormatage.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("clickFormatage.BackgroundImage")));
+            this.clickFormatage.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.clickFormatage.FlatAppearance.BorderSize = 0;
+            this.clickFormatage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clickFormatage.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clickFormatage.ForeColor = System.Drawing.Color.White;
+            this.clickFormatage.Location = new System.Drawing.Point(15, 210);
+            this.clickFormatage.Name = "clickFormatage";
+            this.clickFormatage.Size = new System.Drawing.Size(431, 42);
+            this.clickFormatage.TabIndex = 104;
+            this.clickFormatage.Text = "LANCER LE FORMATAGE";
+            this.clickFormatage.UseVisualStyleBackColor = true;
+            this.clickFormatage.Click += new System.EventHandler(this.clickFormatage_Click);
             // 
-            // checkBox3
+            // listeClesUsbFormatage
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox3.Location = new System.Drawing.Point(224, 57);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(222, 18);
-            this.checkBox3.TabIndex = 102;
-            this.checkBox3.Text = "Sélectionner tous les périphériques";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.listeClesUsbFormatage.Location = new System.Drawing.Point(15, 89);
+            this.listeClesUsbFormatage.Name = "listeClesUsbFormatage";
+            this.listeClesUsbFormatage.Size = new System.Drawing.Size(431, 97);
+            this.listeClesUsbFormatage.TabIndex = 103;
+            this.listeClesUsbFormatage.UseCompatibleStateImageBehavior = false;
+            // 
+            // checkboxToutUsbFormatage
+            // 
+            this.checkboxToutUsbFormatage.AutoSize = true;
+            this.checkboxToutUsbFormatage.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkboxToutUsbFormatage.Location = new System.Drawing.Point(224, 57);
+            this.checkboxToutUsbFormatage.Name = "checkboxToutUsbFormatage";
+            this.checkboxToutUsbFormatage.Size = new System.Drawing.Size(222, 18);
+            this.checkboxToutUsbFormatage.TabIndex = 102;
+            this.checkboxToutUsbFormatage.Text = "Sélectionner tous les périphériques";
+            this.checkboxToutUsbFormatage.UseVisualStyleBackColor = true;
+            this.checkboxToutUsbFormatage.CheckedChanged += new System.EventHandler(this.checkboxToutUsbFormatage_CheckedChanged);
             // 
             // label7
             // 
@@ -884,22 +917,14 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("Lucida Sans", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Image = ((System.Drawing.Image)(resources.GetObject("label3.Image")));
             this.label3.Location = new System.Drawing.Point(416, 18);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(164, 23);
+            this.label3.Size = new System.Drawing.Size(170, 25);
             this.label3.TabIndex = 95;
             this.label3.Text = "DUPLICATEUR";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 468);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(431, 67);
-            this.richTextBox1.TabIndex = 105;
-            this.richTextBox1.Text = "";
             // 
             // MainWindow
             // 
@@ -933,9 +958,9 @@
             this.panel1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formatageAvertissementImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formatageSuccesImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.formatageErreurImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
@@ -997,10 +1022,10 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.ListView listeClesUsbFormatage;
+        private System.Windows.Forms.CheckBox checkboxToutUsbFormatage;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button clickFormatage;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -1009,12 +1034,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.PictureBox pictureBox13;
-        private System.Windows.Forms.PictureBox pictureBox14;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label formatageAvertissementMessage;
+        private System.Windows.Forms.PictureBox formatageAvertissementImg;
+        private System.Windows.Forms.Label formatageSuccesMessage;
+        private System.Windows.Forms.PictureBox formatageSuccesImg;
+        private System.Windows.Forms.PictureBox formatageErreurImg;
+        private System.Windows.Forms.Label formatageErreurMessage;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.PictureBox pictureBox15;
         private System.Windows.Forms.Label label13;
@@ -1022,6 +1047,7 @@
         private System.Windows.Forms.PictureBox pictureBox17;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.ComboBox comboBoxFormatUsb;
     }
 }
 

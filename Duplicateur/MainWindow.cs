@@ -79,20 +79,31 @@ namespace Duplicateur
         {
             // Set the view to show details.
             listeClesUsb.View = View.Details;
+            listeClesUsbFormatage.View = View.Details;
             // Allow the user to rearrange columns.
             listeClesUsb.AllowColumnReorder = true;
+            listeClesUsbFormatage.AllowColumnReorder = true;
             // Display check boxes.
             listeClesUsb.CheckBoxes = true;
+            listeClesUsbFormatage.CheckBoxes = true;
             // Select the item and subitems when selection is made.
             listeClesUsb.FullRowSelect = true;
+            listeClesUsbFormatage.FullRowSelect = true;
             // Sort the items in the list in ascending order.
             listeClesUsb.Sorting = SortOrder.Ascending;
+            listeClesUsbFormatage.Sorting = SortOrder.Ascending;
 
             //Ajout des headers dans la liste view des cles usb
             listeClesUsb.Columns.Add("Racine", -2, HorizontalAlignment.Left);
             listeClesUsb.Columns.Add("Espace total", -2, HorizontalAlignment.Left);
             listeClesUsb.Columns.Add("Espace libre", -2, HorizontalAlignment.Left);
             listeClesUsb.Columns.Add("Format", -2, HorizontalAlignment.Center);
+
+            //Ajout des headers dans la liste view des cles usb
+            listeClesUsbFormatage.Columns.Add("Racine", -2, HorizontalAlignment.Left);
+            listeClesUsbFormatage.Columns.Add("Espace total", -2, HorizontalAlignment.Left);
+            listeClesUsbFormatage.Columns.Add("Espace libre", -2, HorizontalAlignment.Left);
+            listeClesUsbFormatage.Columns.Add("Format", -2, HorizontalAlignment.Center);
 
             List<DriveInfo> usbList = fileMgr.getUsbList();
 
@@ -112,7 +123,16 @@ namespace Duplicateur
                 item.SubItems.Add(usb.getFreeSpaceStr());
                 item.SubItems.Add(usb.getFormat());
 
+
+
                 listeClesUsb.Items.Add(item);
+                item = new ListViewItem();
+                item.Tag = di.Name;
+                item.Text = di.Name;
+                item.SubItems.Add(usb.getTotalSizeStr());
+                item.SubItems.Add(usb.getFreeSpaceStr());
+                item.SubItems.Add(usb.getFormat());
+                listeClesUsbFormatage.Items.Add(item);
             }
         }
 
@@ -769,6 +789,112 @@ namespace Duplicateur
          * */
         private void processCopy()
         {
+        }
+
+        private void checkboxToutUsbFormatage_CheckedChanged(object sender, EventArgs e)
+        {
+            Boolean selectionne;
+            if (this.checkboxToutUsbFormatage.Checked)
+            {
+                selectionne = true;
+            }
+            else
+            {
+                selectionne = false;
+            }
+
+            foreach (ListViewItem i in this.listeClesUsbFormatage.Items)
+            {
+                i.Checked = selectionne;
+            }
+        }
+
+        private void clickFormatage_Click(object sender, EventArgs e)
+        {
+            String format = this.comboBoxFormatUsb.SelectedItem.ToString();
+            Usb temp;
+            int compteur = 0;
+            Boolean erreur = false, tempErreur = false;
+            String messageErreur = "";
+            foreach (ListViewItem i in this.listeClesUsbFormatage.Items)
+            {
+                if (i.Checked)
+                {
+                    temp = new Usb((Char)i.SubItems[0].Text.ToString()[0]);
+                    tempErreur = temp.FormatDrive("test", format.ToUpper());
+                    if (!tempErreur)
+                    {
+                        erreur = true;
+                        if(messageErreur != "") {
+                            messageErreur += " / ";
+                        }
+                        messageErreur += "Une erreur est survenu lors du formatage sur la clé " + temp.driveLetter;
+                    }
+                    i.SubItems[3].Text = format;
+                    compteur++;
+                }
+            }
+
+            if (erreur)
+            {
+                affichageMessageFormatage(0, messageErreur);
+            }
+            else if (compteur == 0)
+            {
+                affichageMessageFormatage(1, "Veuillez sélectionner un périphérique");
+            }
+            else
+            {
+                affichageMessageFormatage(2, "Formatage effectué avec succès");
+            }
+        }
+        private void affichageMessageFormatage(int statut, String message)
+        {
+            //Erreur
+            if(statut != 0) {
+                this.formatageErreurImg.Location = new System.Drawing.Point(16, 263);
+                this.formatageErreurMessage.Location = new System.Drawing.Point(44, 266);
+                this.formatageErreurMessage.Visible = false;
+                this.formatageErreurImg.Visible = false;
+            }
+            else {
+                this.formatageErreurMessage.Visible = true;
+                this.formatageErreurImg.Visible = true;
+                this.formatageErreurMessage.Text = message;
+            }
+            //Avertissement
+            if (statut == 1)
+            {
+                this.formatageAvertissementImg.Location = new System.Drawing.Point(16, 263);
+                this.formatageAvertissementMessage.Location = new System.Drawing.Point(44, 266);
+                this.formatageAvertissementMessage.Visible = true;
+                this.formatageAvertissementImg.Visible = true;
+                this.formatageAvertissementMessage.Text = message;
+            }
+            else
+            {
+                this.formatageAvertissementMessage.Visible = false;
+                this.formatageAvertissementImg.Visible = false;
+            }
+            //Succes
+            if (statut == 2)
+            {
+                this.formatageSuccesImg.Location = new System.Drawing.Point(16, 263);
+                this.formatageSuccesMessage.Location = new System.Drawing.Point(44, 266);
+                this.formatageSuccesMessage.Visible = true;
+                this.formatageSuccesImg.Visible = true;
+                this.formatageSuccesMessage.Text = message;
+            }
+            else
+            {
+                this.formatageSuccesMessage.Visible = false;
+                this.formatageSuccesImg.Visible = false;
+            }
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
