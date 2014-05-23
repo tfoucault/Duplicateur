@@ -16,17 +16,19 @@ namespace Duplicateur
     public partial class Chargement : Form
     {
         //private BackgroundWorker backgroundWorker1 = new BackgroundWorker();
-        private Thread copyThread;
+        //private Thread copyThread;
+        private Hashtable threadTable = new Hashtable();
 
         private Hashtable groupList = new Hashtable();
         private List<Usb> usbList = new List<Usb>();
 
-        //Delegates pour communiquer avec la fenetre modale
-        public delegate void changerLabelCles(string text);
-        public delegate void changerLabelCopie(string text);
-        public delegate void changerProgresCles(int value);
-        public delegate void changerProgresCopie(int value);
-        public delegate void changerVitesseCopie(string str);
+        private Hashtable allFiles = new Hashtable();
+        private int clesTraitees = 0;
+
+        private bool errorCopie = false;
+
+        public delegate void changerProgresCles();
+        public delegate void notifierCopieFichier(string filepath);
         public delegate void changerEtatBoutonsCopie(bool continuer,bool pause, bool arreter);
         public delegate void changerEtatBoutonsChoix(bool fusionner, bool ignorer, bool remplacer, bool fermer);
         public delegate void changerMessageCopie(int typeAlerte, string messageAlerte, string description);
@@ -41,10 +43,10 @@ namespace Duplicateur
             //Initialisation progress bar cles
             progressBarCles.Minimum = 0;
             progressBarCles.Maximum = usbList.Count;
-            
-            //Initialisation progress bar fichiers
-            progressBarFichiers.Minimum = 0;
-            progressBarFichiers.Maximum = getCopyListCount();
+
+            //Initialisation label copie cle
+            labelCopieCle.Text = "Clés usb traitées ... ("
+                + clesTraitees + "/" + usbList.Count + ")";
 
             //Initialisation boutons de copie
             btnContinueCopie.Enabled = false;
@@ -57,13 +59,27 @@ namespace Duplicateur
             btnNePasCopier.Hide();
             btnFermerCopie.Hide();
 
-            //Initialisation du thread
-            copyThread = new Thread(processSelectionCopy);
-            copyThread.Start();
-            
             //Initialisation message notif
             pictureMessageCopieNotif.Hide();
             pictureMessageCopieOk.Hide();
+
+            //Initialisation hashtable fichier
+            getAllFiles();
+
+            //Initialisation progress bar fichiers
+            progressBarFichiers.Minimum = 0;
+            progressBarFichiers.Maximum = allFiles.Count;
+
+
+            //On lance la copie multithread
+            for (int i = 0; i < usbList.Count; ++i)
+            {
+                Usb usb = usbList[i];
+                string usbName = usb.driveLetter + ":";
+                Thread thread = new Thread(processSelectionCopy);
+                threadTable.Add(usbName, thread);
+                thread.Start(usb);
+            }
         }
 
         private int getCopyListCount()
@@ -79,24 +95,35 @@ namespace Duplicateur
             return copyListCount;
         }
 
-        public void cLabelCles(string text)
+        public void nCopieFichier(string filepath)
         {
-            labelCopieCle.Text = text;
+            int nbCopie = (int)allFiles[filepath];
+            ++nbCopie;
+
+            if (nbCopie == usbList.Count)
+            {
+                this.progressBarFichiers.Increment(1);
+            }
+
+            //allFiles.Add(filepath, nbCopie);
+            allFiles[filepath] = nbCopie;
         }
 
-        public void cLabelCopie(string text)
+        public void cProgresCles()
         {
-            this.labelCopieFichier.Text = text;
-        }
+            this.progressBarCles.Increment(1);
+            ++clesTraitees;
+            this.labelCopieCle.Text = "Clés usb traitées ... (" + clesTraitees + "/" + usbList.Count + ")";
 
-        public void cProgresCles(int value)
-        {
-            this.progressBarCles.Value = value;
-        }
-
-        public void cProgresCopie(int value)
-        {
-            this.progressBarFichiers.Value = value;
+            if (clesTraitees == usbList.Count)
+            {
+                if (!errorCopie)
+                {
+                    Invoke((changerMessageCopie)cMessageCopie, 0, "Copie terminée avec succès", "");
+                }
+                Invoke((changerEtatBoutonsCopie)cEtatBoutonsCopie, false, false, false);
+                Invoke((changerEtatBoutonsChoix)cEtatBoutonChoix, false, false, false, true);
+            }
         }
 
         public void cEtatBoutonsCopie(bool continuer, bool pause, bool arreter)
@@ -122,16 +149,19 @@ namespace Duplicateur
                     pictureMessageCopieOk.Show();
                     pictureMessageCopieNotif.Hide();
                     labelMessageCopie.Text = messageAlerte;
+                    textMessageCopie.Text = description;
                     break;
                 case 1:
                     pictureMessageCopieNotif.Show();
                     pictureMessageCopieOk.Hide();
-                    labelMessageCopie.Text = messageAlerte;
+                    labelMessageCopie.Text = "Erreur de copie fichier";
+                    textMessageCopie.Text += description + "\n";
                     break;
                 default:
                     labelMessageCopie.Text = "";
                     pictureMessageCopieOk.Hide();
                     pictureMessageCopieNotif.Hide();
+                    textMessageCopie.Text = description;
                     break;
             }
         }
@@ -139,6 +169,92 @@ namespace Duplicateur
         /*Fonction qui permet de copier toute la liste de fichier et dossier selectionnés
          * */
         //public void processSelectionCopy(BackgroundWorker worker, DoWorkEventArgs e)
+        public void processSelectionCopy(object obj)
+        {
+            Usb usb = (Usb)obj;
+
+            String destPath = "";
+
+            //On parcoure tous les groupes de dossier
+            foreach (string group in groupList.Keys)
+            {
+                //Si copier à la racine
+                if (usb.copyToRoot)
+                {
+                    destPath = usb.driveLetter + ":\\";
+                }
+                else
+                {
+                    destPath = usb.getDestinationPath();
+                }
+
+                //Si dossier parent à créer
+                if (usb.getFolderToCreate().Length > 0)
+                {
+                    destPath = Path.Combine(destPath, usb.getFolderToCreate());
+                }
+
+                //On cree un dossier a la destination avec le nom du groupe
+                //String destDirName = usb.driveLetter + ":\\" + group;
+                //Directory.CreateDirectory(destDirName);
+                destPath = Path.Combine(destPath, group);
+
+                if (!Directory.Exists(destPath))
+                {
+                    Directory.CreateDirectory(destPath);
+                }
+
+
+                //On recupere l'ensemble des fichier et dossiers du groupe
+                List<String> pathList = (List<String>)groupList[group];
+
+                foreach (String path in pathList)
+                {
+                    //Si le path est un repertoire
+                    if (Directory.Exists(path))
+                    {
+                        //On construit le chemin du dossier de destination
+                        DirectoryInfo di = new DirectoryInfo(path);
+                        //On appelle la fonction de copie récursive
+                        String destDir = Path.Combine(destPath, di.Name);
+
+                        String message = "Copie de " + path + " vers " + destDir;
+                        //Invoke((changerLabelCopie)cLabelCopie, message);
+                        copyDirectory(path, destDir, true);
+                    }
+                    else // C'est un fichier
+                    {
+                        //On copie le fichier
+                        FileInfo fi = new FileInfo(path);
+                        String destFile = Path.Combine(destPath, fi.Name);
+
+                        //String message = "Copie de " + path + " vers " + destFile;
+                        //Invoke((changerLabelCopie)cLabelCopie, message);
+                        try
+                        {
+
+                            fi.CopyTo(destFile, true);
+                        }
+                        catch (Exception e)
+                        {
+                            //string labeErr = "Copie impossible du fichier " + fi.Name;
+                            Invoke((changerMessageCopie)cMessageCopie, 1, "", e.Message);
+                            errorCopie = true;
+                        }
+                        finally
+                        {
+                            Invoke((notifierCopieFichier)nCopieFichier, path);
+                        }
+                    }
+                }
+            }
+
+            //Copie des fichier finie pour une des clés usb (envoyer mail)
+            Invoke((changerProgresCles)cProgresCles);
+            envoyerMail();
+        }
+
+        /*
         public void processSelectionCopy()
         {
             //On parcours la liste des usb destinations
@@ -181,7 +297,7 @@ namespace Duplicateur
                         {
                             //On copie le fichier
                             FileInfo fi = new FileInfo(path);
-                            String destFile = Path.Combine(destDirName,fi.Name);
+                            String destFile = Path.Combine(destDirName, fi.Name);
 
                             String message = "Copie de " + path + " vers " + destFile;
                             Invoke((changerLabelCopie)cLabelCopie, message);
@@ -193,7 +309,7 @@ namespace Duplicateur
                     }
                 }
 
-                Invoke((changerProgresCles)cProgresCles, i+1);
+                Invoke((changerProgresCles)cProgresCles, i + 1);
             }
 
             //Copie des fichier fini (notification pour dire que la copie est terminé)
@@ -202,6 +318,8 @@ namespace Duplicateur
             Invoke((changerEtatBoutonsChoix)cEtatBoutonChoix, false, false, false, true);
             envoyerMail();
         }
+         * 
+         * */
 
         /*Fonction qui permet de copier recursivement des dossiers 
          * */
@@ -229,16 +347,17 @@ namespace Duplicateur
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
-                //try
-                //{
-                string temppath = Path.Combine(destDirName, file.Name);
-                //MessageBox.Show(temppath);
-                file.CopyTo(temppath, true);
-                //}
-                //catch (Exception e)
-                //{
-                //MessageBox.Show(e.Message);
-                //}
+                try
+                {
+                    string temppath = Path.Combine(destDirName, file.Name);                
+                    file.CopyTo(temppath, true);
+                    Invoke((notifierCopieFichier)nCopieFichier, file.FullName);
+                }
+                catch (Exception e)
+                {
+                    //Do nothing
+                    Invoke((changerMessageCopie)cMessageCopie, 1, "", e.Message);
+                }
             }
 
             // If copying subdirectories, copy them and their contents to new location. 
@@ -254,27 +373,43 @@ namespace Duplicateur
 
         private void btnPauseCopie_Click(object sender, EventArgs e)
         {
-            copyThread.Suspend();
+            //copyThread.Suspend();
+            foreach (String key in threadTable.Keys)
+            {
+                Thread thread = (Thread)threadTable[key];
+                thread.Suspend();
+            }
+
             btnContinueCopie.Enabled = true;
             btnPauseCopie.Enabled = false;
         }
 
         private void btnContinueCopie_Click(object sender, EventArgs e)
         {
-            copyThread.Resume();
+            //copyThread.Resume();
+            foreach (String key in threadTable.Keys)
+            {
+                Thread thread = (Thread)threadTable[key];
+                thread.Resume();
+            }
             btnContinueCopie.Enabled = false;
             btnPauseCopie.Enabled = true;
         }
 
         private void btnArretCopie_Click(object sender, EventArgs e)
         {
-            copyThread.Abort();
-            while (copyThread.IsAlive)
-            {
-                //Do nothing and wait for the thread to stop
-            }
+            btnPauseCopie.Enabled = false;
 
-            this.Close();
+            foreach (String key in threadTable.Keys)
+            {
+                Thread thread = (Thread)threadTable[key];
+                thread.Abort();
+
+                while (thread.IsAlive)
+                {
+                    //Do nothing and wait for the thread to stop
+                }
+            }
         }
 
         private void btnFermerCopie_Click(object sender, EventArgs e)
@@ -298,6 +433,68 @@ namespace Duplicateur
                     client.EnableSsl = true;
                     client.Send(mail);
                     //MessageBox.Show("Votre message a bien été envoyé.", "Message envoyé", MessageBoxButtons.OK);
+                }
+            }
+        }
+
+
+        /*Fonction qui permet de calculer recursivement la taille d'un dossier
+         * */
+        private void getFolderChildren(String path)
+        {
+            if (Directory.Exists(path))
+            {
+                DirectoryInfo dir = new DirectoryInfo(path);
+
+                try
+                {
+                    FileInfo[] files = dir.GetFiles();
+
+                    foreach (FileInfo file in files)
+                    {
+                        allFiles.Add(file.FullName,0);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                try
+                {
+                    DirectoryInfo[] directories = dir.GetDirectories();
+
+                    foreach (DirectoryInfo directory in directories)
+                    {
+                        getFolderChildren(directory.FullName);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /* Fonction qui permet de calculer la taille de l'ensemble des fichiers à copier
+         * */
+        private void getAllFiles()
+        {
+            foreach (string group in groupList.Keys)
+            {
+                //On recupere l'ensemble des fichier et dossiers du groupe
+                List<String> pathList = (List<String>)groupList[group];
+
+                foreach (String path in pathList)
+                {
+                    if (Directory.Exists(path))
+                    {
+                        getFolderChildren(path);
+                    }
+                    else
+                    {
+                        allFiles.Add(path,0);
+                    }
                 }
             }
         }

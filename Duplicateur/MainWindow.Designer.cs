@@ -31,17 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.textBoxAlerte = new System.Windows.Forms.RichTextBox();
+            this.pictureMessNotif = new System.Windows.Forms.PictureBox();
             this.buttonLancerCopie = new System.Windows.Forms.Button();
             this.listeClesUsb = new System.Windows.Forms.ListView();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureMessOk = new System.Windows.Forms.PictureBox();
+            this.pictureMessErr = new System.Windows.Forms.PictureBox();
             this.btnSelectionFichiers = new System.Windows.Forms.Button();
             this.btnSupprSelection = new System.Windows.Forms.Button();
             this.listeSelection = new System.Windows.Forms.ListView();
@@ -98,15 +97,14 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureMessNotif)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureMessOk)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureMessErr)).BeginInit();
             this.groupBoxParamCle.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -141,18 +139,16 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
-            this.tabPage1.Controls.Add(this.richTextBox1);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.pictureBox11);
+            this.tabPage1.Controls.Add(this.textBoxAlerte);
+            this.tabPage1.Controls.Add(this.pictureMessNotif);
             this.tabPage1.Controls.Add(this.buttonLancerCopie);
             this.tabPage1.Controls.Add(this.listeClesUsb);
             this.tabPage1.Controls.Add(this.pictureBox8);
             this.tabPage1.Controls.Add(this.pictureBox7);
             this.tabPage1.Controls.Add(this.pictureBox6);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.pictureBox5);
-            this.tabPage1.Controls.Add(this.pictureBox4);
+            this.tabPage1.Controls.Add(this.pictureMessOk);
+            this.tabPage1.Controls.Add(this.pictureMessErr);
             this.tabPage1.Controls.Add(this.btnSelectionFichiers);
             this.tabPage1.Controls.Add(this.btnSupprSelection);
             this.tabPage1.Controls.Add(this.listeSelection);
@@ -172,24 +168,24 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dubliquer du contenu";
             // 
-            // label8
+            // textBoxAlerte
             // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(304, 442);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(100, 15);
-            this.label8.TabIndex = 104;
-            this.label8.Text = "Message d\'alerte";
+            this.textBoxAlerte.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBoxAlerte.Location = new System.Drawing.Point(12, 468);
+            this.textBoxAlerte.Name = "textBoxAlerte";
+            this.textBoxAlerte.ReadOnly = true;
+            this.textBoxAlerte.Size = new System.Drawing.Size(431, 67);
+            this.textBoxAlerte.TabIndex = 105;
+            this.textBoxAlerte.Text = "";
             // 
-            // pictureBox11
+            // pictureMessNotif
             // 
-            this.pictureBox11.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox11.BackgroundImage")));
-            this.pictureBox11.Location = new System.Drawing.Point(276, 438);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox11.TabIndex = 103;
-            this.pictureBox11.TabStop = false;
+            this.pictureMessNotif.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureMessNotif.BackgroundImage")));
+            this.pictureMessNotif.Location = new System.Drawing.Point(10, 439);
+            this.pictureMessNotif.Name = "pictureMessNotif";
+            this.pictureMessNotif.Size = new System.Drawing.Size(22, 23);
+            this.pictureMessNotif.TabIndex = 103;
+            this.pictureMessNotif.TabStop = false;
             // 
             // buttonLancerCopie
             // 
@@ -229,7 +225,7 @@
             // pictureBox7
             // 
             this.pictureBox7.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox7.BackgroundImage")));
-            this.pictureBox7.Location = new System.Drawing.Point(509, 28);
+            this.pictureBox7.Location = new System.Drawing.Point(509, 17);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(22, 23);
             this.pictureBox7.TabIndex = 98;
@@ -239,7 +235,7 @@
             // 
             this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox6.Location = new System.Drawing.Point(9, 28);
+            this.pictureBox6.Location = new System.Drawing.Point(15, 17);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(22, 23);
             this.pictureBox6.TabIndex = 97;
@@ -249,39 +245,29 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(37, 28);
+            this.label5.Location = new System.Drawing.Point(43, 17);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(178, 19);
             this.label5.TabIndex = 96;
             this.label5.Text = "Sélection des documents";
             // 
-            // label4
+            // pictureMessOk
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.ForestGreen;
-            this.label4.Location = new System.Drawing.Point(173, 442);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 15);
-            this.label4.TabIndex = 95;
-            this.label4.Text = "Message d\'alerte";
+            this.pictureMessOk.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureMessOk.BackgroundImage")));
+            this.pictureMessOk.Location = new System.Drawing.Point(10, 439);
+            this.pictureMessOk.Name = "pictureMessOk";
+            this.pictureMessOk.Size = new System.Drawing.Size(22, 23);
+            this.pictureMessOk.TabIndex = 94;
+            this.pictureMessOk.TabStop = false;
             // 
-            // pictureBox5
+            // pictureMessErr
             // 
-            this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
-            this.pictureBox5.Location = new System.Drawing.Point(145, 438);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox5.TabIndex = 94;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
-            this.pictureBox4.Location = new System.Drawing.Point(10, 439);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(22, 23);
-            this.pictureBox4.TabIndex = 93;
-            this.pictureBox4.TabStop = false;
+            this.pictureMessErr.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureMessErr.BackgroundImage")));
+            this.pictureMessErr.Location = new System.Drawing.Point(10, 439);
+            this.pictureMessErr.Name = "pictureMessErr";
+            this.pictureMessErr.Size = new System.Drawing.Size(22, 23);
+            this.pictureMessErr.TabIndex = 93;
+            this.pictureMessErr.TabStop = false;
             // 
             // btnSelectionFichiers
             // 
@@ -329,7 +315,8 @@
             // labelAlerte
             // 
             this.labelAlerte.AutoSize = true;
-            this.labelAlerte.ForeColor = System.Drawing.Color.IndianRed;
+            this.labelAlerte.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAlerte.ForeColor = System.Drawing.Color.Black;
             this.labelAlerte.Location = new System.Drawing.Point(38, 442);
             this.labelAlerte.Name = "labelAlerte";
             this.labelAlerte.Size = new System.Drawing.Size(100, 15);
@@ -376,7 +363,7 @@
             // 
             this.labelSelectionCible.AutoSize = true;
             this.labelSelectionCible.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSelectionCible.Location = new System.Drawing.Point(537, 28);
+            this.labelSelectionCible.Location = new System.Drawing.Point(537, 17);
             this.labelSelectionCible.Name = "labelSelectionCible";
             this.labelSelectionCible.Size = new System.Drawing.Size(263, 19);
             this.labelSelectionCible.TabIndex = 66;
@@ -527,6 +514,7 @@
             this.textBoxChoixDossier.Location = new System.Drawing.Point(6, 67);
             this.textBoxChoixDossier.Multiline = true;
             this.textBoxChoixDossier.Name = "textBoxChoixDossier";
+            this.textBoxChoixDossier.ReadOnly = true;
             this.textBoxChoixDossier.Size = new System.Drawing.Size(338, 37);
             this.textBoxChoixDossier.TabIndex = 103;
             // 
@@ -582,7 +570,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Formater les clés USB";
             // 
-           
             // comboBoxFormatUsb
             // 
             this.comboBoxFormatUsb.FormattingEnabled = true;
@@ -677,6 +664,7 @@
             // 
             // listeClesUsbFormatage
             // 
+            this.listeClesUsbFormatage.ImeMode = System.Windows.Forms.ImeMode.On;
             this.listeClesUsbFormatage.Location = new System.Drawing.Point(15, 122);
             this.listeClesUsbFormatage.Name = "listeClesUsbFormatage";
             this.listeClesUsbFormatage.Size = new System.Drawing.Size(434, 97);
@@ -925,14 +913,6 @@
             this.label3.TabIndex = 95;
             this.label3.Text = "DUPLICATEUR";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 468);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(431, 67);
-            this.richTextBox1.TabIndex = 105;
-            this.richTextBox1.Text = "";
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -947,16 +927,18 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Duplicator";
+            this.TopMost = true;
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureMessNotif)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureMessOk)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureMessErr)).EndInit();
             this.groupBoxParamCle.ResumeLayout(false);
             this.groupBoxParamCle.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -1004,9 +986,8 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox pictureMessErr;
+        private System.Windows.Forms.PictureBox pictureMessOk;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox6;
@@ -1039,8 +1020,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.PictureBox pictureMessNotif;
         private System.Windows.Forms.Label formatageAvertissementMessage;
         private System.Windows.Forms.PictureBox formatageAvertissementImg;
         private System.Windows.Forms.Label formatageSuccesMessage;
@@ -1053,7 +1033,7 @@
         private System.Windows.Forms.PictureBox ejectionSuccesImg;
         private System.Windows.Forms.PictureBox ejectionErreurImg;
         private System.Windows.Forms.Label ejectionErreurMessage;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox textBoxAlerte;
         private System.Windows.Forms.ComboBox comboBoxFormatUsb;
     }
 }

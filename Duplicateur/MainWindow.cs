@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -30,21 +31,25 @@ namespace Duplicateur
         //Usb courant selectionné
         private Usb currentUsb = null;
 
-        //Variable qui contient la taille de la liste
-        //de selection exprimée en octets
-        private long selectionSize = -1;
+        //Liste des chemins de la liste de selection
         private List<String> selectionPaths = new List<String>();
 
-        //private Thread selectionSizeThread = null;
-        private volatile bool selectionListeUpdated = false;
-
         private DriveDetector driveDetector = null;
+
+        private bool internalEjected = false;
+        private bool externalEjected = false;
 
         public MainWindow()
         {
             InitializeComponent();
             initListSelection();
             initListClesUsb();
+
+            labelAlerte.Text = "";
+            pictureMessOk.Hide();
+            pictureMessNotif.Hide();
+            pictureMessErr.Hide();
+
             driveDetector = new DriveDetector();
             driveDetector.DeviceArrived += new DriveDetectorEventHandler(OnDriveArrived);
             driveDetector.DeviceRemoved += new DriveDetectorEventHandler(OnDriveRemoved);
@@ -241,37 +246,9 @@ namespace Duplicateur
                         //On ajoute l'item crée au groupe parent
                         item.Group = lvg;
                     }
-                }                
-
-                /*
-                //On met à jour la nouvelle taille de la liste de selection
-                updateSelectionPaths();
-
-                //Si un thread est en cours
-                if (selectionSizeThread != null && selectionSizeThread.IsAlive)
-                {
-                    //On arrete le thread en cours
-                    selectionListeUpdated = true;
-                    MessageBox.Show("Thread en cours. Annulation ...");
-
-                    //On attend que le thread se termine
-                    while (selectionSizeThread.ThreadState != ThreadState.Stopped)
-                    {
-                        //Do nothing
-                    }
-
-                    MessageBox.Show("Thread arrété");
                 }
-                else
-                {
-                    MessageBox.Show("Demarrage nouveau thread");
-                    selectionSizeThread = new Thread(updateSelectionSize);
-                    selectionSizeThread.Start();
-                }
-                //string selectSizeStr = Math.Round(((decimal)selectionSize) / (1024*1024)) + " Mo";
-                //string selectSizeStr = selectionSize + " octets";
-                //MessageBox.Show(selectSizeStr);
-                 * */
+
+                updateDestination();
             }
         }
 
@@ -339,11 +316,7 @@ namespace Duplicateur
                     }
                 }
 
-                //On calcule la nouvelle taille de la liste de selection
-                //long selectionSize = getSelectionSize();
-                //string selectSizeStr = selectionSize + " Octets";
-
-                //MessageBox.Show(selectSizeStr);
+                updateDestination();
             }
         }
 
@@ -506,6 +479,8 @@ namespace Duplicateur
         {
             //On ouvre un dialog pour le choix d'un dossier de desstination
             FolderBrowserDialog fbd = new FolderBrowserDialog();
+            //Parametre l'ouverture du browser sur poste de travail
+            fbd.RootFolder = Environment.SpecialFolder.MyComputer;
 
             if (fbd.ShowDialog() == DialogResult.OK)
             {
@@ -591,47 +566,7 @@ namespace Duplicateur
             //mise à jour paramétrage clé usb selectionnée
             currentUsb.setNotifMailAddress(textBoxMail.Text);
         }
-   
-        /*Fonction pour actualiser la taille de la liste de selection
-         * */
-        public void updateSelectionSize()
-        {
-            selectionSize = -1;
-
-            string[] tempList = new string[selectionPaths.Count];
-            selectionPaths.CopyTo(tempList);
-
-            foreach (string item in tempList)
-            {
-                if (selectionListeUpdated) break;
-
-                if (Directory.Exists(item))
-                {
-                    if (selectionListeUpdated) break;
-                    selectionSize += getFolderSize(item);
-                }
-                else
-                {
-                    if (selectionListeUpdated) break;
-                    FileInfo fi = new FileInfo(item);
-                    selectionSize += fi.Length;
-                }
-            }
-
-            MessageBox.Show("Size of selection have been update : " + selectionSize + " octets");
-        }
-
-        /*Fonction pour actualiser la taille de la liste des chemins de fichier de la liste
-         * */
-        private void updateSelectionPaths()
-        {
-            selectionPaths.Clear();
-
-            foreach (ListViewItem item in listeSelection.Items)
-            {
-                selectionPaths.Add(item.Tag.ToString());
-            }
-        }
+ 
 
         /*Fonction qui permet de calculer recursivement la taille d'un dossier
          * */
@@ -682,8 +617,6 @@ namespace Duplicateur
 
             foreach (ListViewItem item in listeSelection.Items)
             {
-                if (selectionListeUpdated) break;
-
                 if (Directory.Exists(item.Tag.ToString()))
                 {
                     size += getFolderSize(item.Tag.ToString());
@@ -694,8 +627,6 @@ namespace Duplicateur
                     size += fi.Length;
                 }
             }
-
-            //MessageBox.Show("Size of selection have been update : " + size + " octets");
 
             return size;
         }
@@ -712,7 +643,8 @@ namespace Duplicateur
             if (listeSelection.Items.Count == 0)
             {
                 errorMessage = "Aucun fichier à copier";
-                MessageBox.Show(errorMessage);
+                //MessageBox.Show(errorMessage);
+                changerMessageErreur(1, errorMessage,"Veuillez selectionner des fichiers sources pour la copie");
                 return;
             }
 
@@ -730,9 +662,35 @@ namespace Duplicateur
             if (nbCles == 0)
             {
                 errorMessage = "Au moins une clé doit être séléctionnée";
-                MessageBox.Show(errorMessage);
+                //MessageBox.Show(errorMessage);
+                changerMessageErreur(1, errorMessage, "Veuillez selectionner au moins une clé pour la destination");
                 return;
             }
+
+            /**********************************************************************/
+            //Verification que les cibles ne soient pas les sources
+
+            bool cibleIsSource = false;
+
+            foreach(String key in usbList.Keys)
+            {
+                Usb usb = (Usb)usbList[key];
+
+                if (usb.isSelected && usb.isSource)
+                {
+                    cibleIsSource = true;
+                    errorMessage += "La clé " + usb.driveLetter + " ne peut pas etre selectionnée "
+                        + " comme cible car elle est déja utilisée comme source\n";
+                }
+            }
+
+            if (cibleIsSource)
+            {
+                //MessageBox.Show(errorMessage);
+                changerMessageErreur(1, "Clé(s) cible déjà utilisée comme source", errorMessage);
+                return;
+            }
+
             /**********************************************************************/
             //Verification de l'espace libre sur les cles de destination selectionnées
 
@@ -755,7 +713,33 @@ namespace Duplicateur
 
             if (!enoughSpace)
             {
-                MessageBox.Show(errorMessage);
+                //MessageBox.Show(errorMessage);
+                changerMessageErreur(1, "Pas asser d'espace libre pour les destinations", errorMessage);
+                return;
+            }
+
+            /**********************************************************************/
+            //Verification que le dossier de destination est renseigné si coche
+
+            bool destPathOk = true;
+
+            foreach (string key in usbList.Keys)
+            {
+                Usb usb = (Usb)usbList[key];
+                if (usb.isSelected)
+                {
+                    if (!usb.copyToRoot && usb.getDestinationPath().Length == 0)
+                    {
+                        destPathOk = false;
+                        errorMessage += "Aucun dossier de destination pour la clé " + usb.driveLetter + "\n";
+                    }
+                }
+            }
+
+            if (!destPathOk)
+            {
+                //MessageBox.Show(errorMessage);
+                changerMessageErreur(1,"Pas de dossier choisis pour la ou les supports sélectionnées",errorMessage);
                 return;
             }
 
@@ -784,7 +768,8 @@ namespace Duplicateur
 
             if (!validEmails)
             {
-                MessageBox.Show(errorMessage);
+                //MessageBox.Show(errorMessage);
+                changerMessageErreur(1, "Mail renseigné(s) incorrects", errorMessage);
                 return;
             }
 
@@ -792,7 +777,7 @@ namespace Duplicateur
 
             //Si la copie est possible, on crée une nouvelle fenetre de chargement
             //et on initialise avec la liste des fichiers et des destinations
-            MessageBox.Show("Demarrage de la copie");
+            //MessageBox.Show("Demarrage de la copie");
 
             //On récupere la liste des chemin à copier
             Hashtable groupList = new Hashtable();
@@ -837,6 +822,8 @@ namespace Duplicateur
         // Called by DriveDetector when removable device in inserted 
         private void OnDriveArrived(object sender, DriveDetectorEventArgs e)
         {
+            internalEjected = false;
+            externalEjected = false;
 
             DriveInfo di = new DriveInfo(e.Drive);
             string usbName = e.Drive.Substring(0, 1);
@@ -850,7 +837,22 @@ namespace Duplicateur
             item.SubItems.Add(usb.getFreeSpaceStr());
             item.SubItems.Add(usb.getFormat());
             listeClesUsb.Items.Add(item);
-            
+
+            ListViewItem item2 = new ListViewItem();
+            item2.Tag = di.Name;
+            item2.Text = di.Name;
+            item2.SubItems.Add(usb.getTotalSizeStr());
+            item2.SubItems.Add(usb.getFreeSpaceStr());
+            item2.SubItems.Add(usb.getFormat());
+            listeClesUsbFormatage.Items.Add(item2);
+
+            ListViewItem item3 = new ListViewItem();
+            item3.Tag = di.Name;
+            item3.Text = di.Name;
+            item3.SubItems.Add(usb.getTotalSizeStr());
+            item3.SubItems.Add(usb.getFreeSpaceStr());
+            item3.SubItems.Add(usb.getFormat());
+            listViewEjection.Items.Add(item3);
         }
 
         // Called by DriveDetector after removable device has been unpluged 
@@ -858,16 +860,47 @@ namespace Duplicateur
         {
             // TODO: do clean up here, etc. Letter of the removed drive is in e.Drive;
             //On supprime la cle de la hashtable
-            usbList.Remove(e.Drive);
 
-            int index = 0;
+            bool cleInList = false;
 
-            for (int i = 0; i < listeClesUsb.Items.Count; ++i)
+            foreach (ListViewItem item in listeClesUsb.Items)
             {
-                if (listeClesUsb.Items[i].Tag.ToString() == e.Drive) index = i;
+                if (item.Text == e.Drive) cleInList = true;
             }
 
-            listeClesUsb.Items.RemoveAt(index);
+            if (!internalEjected && cleInList)
+            {
+                usbList.Remove(e.Drive);
+
+                int index = 0;
+
+                for (int i = 0; i < listeClesUsb.Items.Count; ++i)
+                {
+                    if (listeClesUsb.Items[i].Tag.ToString() == e.Drive) index = i;
+                }
+
+                listeClesUsb.Items.RemoveAt(index);
+
+                index = 0;
+
+                for (int i = 0; i < listeClesUsbFormatage.Items.Count; ++i)
+                {
+                    if (listeClesUsbFormatage.Items[i].Tag.ToString() == e.Drive) index = i;
+                }
+
+                listeClesUsbFormatage.Items.RemoveAt(index);
+
+                index = 0;
+
+                for (int i = 0; i < listViewEjection.Items.Count; ++i)
+                {
+                    if (listViewEjection.Items[i].Tag.ToString() == e.Drive) index = i;
+                }
+
+                listViewEjection.Items.RemoveAt(index);
+
+                externalEjected = true;
+            }
         }
 
         // Called by DriveDetector when removable drive is about to be removed
@@ -895,49 +928,64 @@ namespace Duplicateur
 
         private void clickFormatage_Click(object sender, EventArgs e)
         {
-            String format = this.comboBoxFormatUsb.SelectedItem.ToString();
-            Usb temp;
-            int compteur = 0;
-            Boolean erreur = false, tempErreur = false;
-            String messageErreur = "";
-            foreach (ListViewItem i in this.listeClesUsbFormatage.Items)
+
+            if (this.comboBoxFormatUsb.SelectedItem == null ||
+                this.comboBoxFormatUsb.SelectedItem.ToString().Length == 0)
             {
-                if (i.Checked)
-                {
-                    temp = new Usb((Char)i.SubItems[0].Text.ToString()[0]);
-                    tempErreur = temp.FormatDrive("test", format.ToUpper());
-                    if (!tempErreur)
-                    {
-                        erreur = true;
-                        if(messageErreur != "") {
-                            messageErreur += " / ";
-                        }
-                        messageErreur += "Une erreur est survenu lors du formatage sur la clé " + temp.driveLetter;
-                    }
-                    i.SubItems[3].Text = format;
-                    compteur++;
-                }
+                affichageMessageFormatage(1, "Veuillez sélectionner un format dans la liste deroulante");
+                return;
             }
 
-            if (erreur)
+            //popup de confirmation
+            if (MessageBox.Show(this, "Etes-vous sûr de vouloir formatter ?", "ATTENTION !!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
-                affichageMessageFormatage(0, messageErreur);
-            }
-            else if (compteur == 0)
-            {
-                affichageMessageFormatage(1, "Veuillez sélectionner un périphérique");
-            }
-            else
-            {
-                affichageMessageFormatage(2, "Formatage effectué avec succès");
+                String format = this.comboBoxFormatUsb.SelectedItem.ToString();
+
+                Usb temp;
+                int compteur = 0;
+                Boolean erreur = false, tempErreur = false;
+                String messageErreur = "";
+                foreach (ListViewItem i in this.listeClesUsbFormatage.Items)
+                {
+                    if (i.Checked)
+                    {
+                        temp = new Usb((Char)i.SubItems[0].Text.ToString()[0]);
+                        tempErreur = temp.FormatDrive("test", format.ToUpper());
+                        if (!tempErreur)
+                        {
+                            erreur = true;
+                            if (messageErreur != "")
+                            {
+                                messageErreur += " / ";
+                            }
+                            messageErreur += "Une erreur est survenu lors du formatage sur la clé " + temp.driveLetter;
+                        }
+                        i.SubItems[3].Text = format;
+                        compteur++;
+                    }
+                }
+
+                if (erreur)
+                {
+                    affichageMessageFormatage(0, messageErreur);
+                }
+                else if (compteur == 0)
+                {
+                    affichageMessageFormatage(1, "Veuillez sélectionner un périphérique");
+                }
+                else
+                {
+                    affichageMessageFormatage(2, "Formatage effectué avec succès");
+                }
             }
         }
+
         private void affichageMessageFormatage(int statut, String message)
         {
             //Erreur
             if(statut != 0) {
-                this.formatageErreurImg.Location = new System.Drawing.Point(16, 263);
-                this.formatageErreurMessage.Location = new System.Drawing.Point(44, 266);
+                this.formatageErreurImg.Location = new System.Drawing.Point(16, 273);
+                this.formatageErreurMessage.Location = new System.Drawing.Point(44, 276);
                 this.formatageErreurMessage.Visible = false;
                 this.formatageErreurImg.Visible = false;
             }
@@ -949,8 +997,8 @@ namespace Duplicateur
             //Avertissement
             if (statut == 1)
             {
-                this.formatageAvertissementImg.Location = new System.Drawing.Point(16, 263);
-                this.formatageAvertissementMessage.Location = new System.Drawing.Point(44, 266);
+                this.formatageAvertissementImg.Location = new System.Drawing.Point(16, 273);
+                this.formatageAvertissementMessage.Location = new System.Drawing.Point(44, 276);
                 this.formatageAvertissementMessage.Visible = true;
                 this.formatageAvertissementImg.Visible = true;
                 this.formatageAvertissementMessage.Text = message;
@@ -963,8 +1011,8 @@ namespace Duplicateur
             //Succes
             if (statut == 2)
             {
-                this.formatageSuccesImg.Location = new System.Drawing.Point(16, 263);
-                this.formatageSuccesMessage.Location = new System.Drawing.Point(44, 266);
+                this.formatageSuccesImg.Location = new System.Drawing.Point(16, 273);
+                this.formatageSuccesMessage.Location = new System.Drawing.Point(44, 276);
                 this.formatageSuccesMessage.Visible = true;
                 this.formatageSuccesImg.Visible = true;
                 this.formatageSuccesMessage.Text = message;
@@ -1015,6 +1063,42 @@ namespace Duplicateur
                         }
                         messageErreur += "Une erreur est survenu lors de l'éjection de la clé " + temp.driveLetter;
                     }
+                    else
+                    {
+                        internalEjected = true;
+                        externalEjected = false;
+                        //On supprime la cle de la hashtable
+                        usbList.Remove(i.Text);
+
+                        //On supprime la clé de la liste
+                        listViewEjection.Items.Remove(i);
+
+                        //On supprime la clé de la liste onglet formattage
+                        int index = 0;
+
+                        for (int indice = 0; indice < listeClesUsbFormatage.Items.Count; ++indice)
+                        {
+                            if (listeClesUsbFormatage.Items[indice].Text == i.Text)
+                            {
+                                index = indice;
+                            }
+                        }
+
+                        listeClesUsbFormatage.Items.RemoveAt(index);
+
+                        //On supprime de la liste des clés du premier onglet
+                        index = 0;
+
+                        for (int indice = 0; indice < listeClesUsb.Items.Count; ++indice)
+                        {
+                            if (listeClesUsb.Items[indice].Text == i.Text)
+                            {
+                                index = indice;
+                            }
+                        }
+
+                        listeClesUsb.Items.RemoveAt(index);
+                    }
                     compteur++;
                 }
             }
@@ -1037,8 +1121,8 @@ namespace Duplicateur
             //Erreur
             if (statut != 0)
             {
-                this.ejectionErreurImg.Location = new System.Drawing.Point(15, 264);
-                this.ejectionErreurMessage.Location = new System.Drawing.Point(43, 267);
+                this.ejectionErreurImg.Location = new System.Drawing.Point(15, 245);
+                this.ejectionErreurMessage.Location = new System.Drawing.Point(42, 248);
                 this.ejectionErreurMessage.Visible = false;
                 this.ejectionErreurImg.Visible = false;
             }
@@ -1051,8 +1135,8 @@ namespace Duplicateur
             //Avertissement
             if (statut == 1)
             {
-                this.ejectionAvertissementImg.Location = new System.Drawing.Point(15, 264);
-                this.ejectionAvertissementMessage.Location = new System.Drawing.Point(43, 267);
+                this.ejectionAvertissementImg.Location = new System.Drawing.Point(14, 245);
+                this.ejectionAvertissementMessage.Location = new System.Drawing.Point(42, 248);
                 this.ejectionAvertissementMessage.Visible = true;
                 this.ejectionAvertissementImg.Visible = true;
                 this.ejectionAvertissementMessage.Text = message;
@@ -1065,8 +1149,8 @@ namespace Duplicateur
             //Succes
             if (statut == 2)
             {
-                this.ejectionSuccesImg.Location = new System.Drawing.Point(15, 264);
-                this.ejectionSuccesMessage.Location = new System.Drawing.Point(43, 267);
+                this.ejectionSuccesImg.Location = new System.Drawing.Point(14, 245);
+                this.ejectionSuccesMessage.Location = new System.Drawing.Point(42, 248);
                 this.ejectionSuccesMessage.Visible = true;
                 this.ejectionSuccesImg.Visible = true;
                 this.ejectionSuccesMessage.Text = message;
@@ -1084,6 +1168,54 @@ namespace Duplicateur
             string strPattern = "^([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})$";
             
             return System.Text.RegularExpressions.Regex.IsMatch(email, strPattern);
+        }
+
+        private void updateDestination()
+        {
+            foreach (string  key in usbList.Keys)
+            {
+                Usb usb = (Usb)usbList[key];
+                usb.isSource = false;
+            }
+
+            foreach (ListViewItem item in listeSelection.Items)
+            {
+                string itemPath = item.Tag.ToString();
+                string rootDrive = itemPath.Substring(0, 3);
+                Usb usb = (Usb)usbList[rootDrive];
+
+                if(usb != null && !usb.isSource && usbList.Contains(rootDrive))
+                {                    
+                    usb.isSource = true;
+                }
+            }
+        }
+
+        private void changerMessageErreur(int type, string message, string description)
+        {
+            switch (type)
+            {
+                case 0:
+                    pictureMessOk.Show();
+                    pictureMessNotif.Hide();
+                    pictureMessErr.Hide();
+                break;
+                case 1:
+                    pictureMessOk.Hide();
+                    pictureMessNotif.Show();
+                    pictureMessErr.Hide();
+                break;
+                case 2:
+                    pictureMessOk.Hide();
+                    pictureMessNotif.Hide();
+                    pictureMessErr.Show();
+                break;
+                default:
+                break;
+            }
+
+            labelAlerte.Text = message;
+            textBoxAlerte.Text = description;
         }
     }
 }

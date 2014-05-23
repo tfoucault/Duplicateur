@@ -1,0 +1,10 @@
+Fichier
+C:\\Users\\Bot\\Applications\\Aptana_Studio_3_Setup_3.4.0.exe
+Duplicateur
+Buffer 256
+111 secondes
+Buffer 2048
+108 secondes
+Windows
+35 secondes
+

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Duplicateur
@@ -16,9 +18,8 @@ namespace Duplicateur
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Usb tempUsb = new Usb('E');
 
             Application.Run(new MainWindow());
-        }
+        }        
     }
 }

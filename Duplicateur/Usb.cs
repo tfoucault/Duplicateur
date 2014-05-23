@@ -53,6 +53,7 @@ namespace Duplicateur
         private string folderToCreate = "Duplication";
         public bool sendNotification = false;
         private string notifMailAddress = "";
+        public bool isSource = false;
 
         public string getFolderToCreate() { return this.folderToCreate; }
         public string getDestinationPath() { return this.destinationPath; }

@@ -35,7 +35,6 @@
             this.progressBarFichiers = new System.Windows.Forms.ProgressBar();
             this.labelCopieCle = new System.Windows.Forms.Label();
             this.labelCopieFichier = new System.Windows.Forms.Label();
-            this.labelVitesseCopie = new System.Windows.Forms.Label();
             this.btnContinueCopie = new System.Windows.Forms.Button();
             this.btnPauseCopie = new System.Windows.Forms.Button();
             this.btnArretCopie = new System.Windows.Forms.Button();
@@ -93,27 +92,18 @@
             this.labelCopieCle.AutoSize = true;
             this.labelCopieCle.Location = new System.Drawing.Point(6, 48);
             this.labelCopieCle.Name = "labelCopieCle";
-            this.labelCopieCle.Size = new System.Drawing.Size(200, 14);
+            this.labelCopieCle.Size = new System.Drawing.Size(162, 14);
             this.labelCopieCle.TabIndex = 103;
-            this.labelCopieCle.Text = "clé de destination 1/? -  Total --Go...";
+            this.labelCopieCle.Text = "Pourcentage de clés traitées";
             // 
             // labelCopieFichier
             // 
             this.labelCopieFichier.AutoSize = true;
             this.labelCopieFichier.Location = new System.Drawing.Point(6, 101);
             this.labelCopieFichier.Name = "labelCopieFichier";
-            this.labelCopieFichier.Size = new System.Drawing.Size(164, 14);
+            this.labelCopieFichier.Size = new System.Drawing.Size(172, 14);
             this.labelCopieFichier.TabIndex = 104;
-            this.labelCopieFichier.Text = "fichier de destination copié...";
-            // 
-            // labelVitesseCopie
-            // 
-            this.labelVitesseCopie.AutoSize = true;
-            this.labelVitesseCopie.Location = new System.Drawing.Point(6, 159);
-            this.labelVitesseCopie.Name = "labelVitesseCopie";
-            this.labelVitesseCopie.Size = new System.Drawing.Size(100, 14);
-            this.labelVitesseCopie.TabIndex = 105;
-            this.labelVitesseCopie.Text = "Vitesse : ---- KB/s";
+            this.labelCopieFichier.Text = "Pourcentage de fichiers copiés";
             // 
             // btnContinueCopie
             // 
@@ -285,7 +275,6 @@
             this.Controls.Add(this.btnArretCopie);
             this.Controls.Add(this.btnPauseCopie);
             this.Controls.Add(this.btnContinueCopie);
-            this.Controls.Add(this.labelVitesseCopie);
             this.Controls.Add(this.labelCopieFichier);
             this.Controls.Add(this.labelCopieCle);
             this.Controls.Add(this.progressBarFichiers);
@@ -295,7 +284,9 @@
             this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Chargement";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Copie";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTitreChargement)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureMessageCopieNotif)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureMessageCopieOk)).EndInit();
@@ -312,7 +303,6 @@
         private System.Windows.Forms.ProgressBar progressBarFichiers;
         private System.Windows.Forms.Label labelCopieCle;
         private System.Windows.Forms.Label labelCopieFichier;
-        private System.Windows.Forms.Label labelVitesseCopie;
         private System.Windows.Forms.Button btnContinueCopie;
         private System.Windows.Forms.Button btnPauseCopie;
         private System.Windows.Forms.Button btnArretCopie;

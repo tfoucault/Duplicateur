@@ -1,0 +1,14 @@
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\bin\Release\Duplicateur.exe.manifest
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\bin\Release\Duplicateur.application
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\bin\Release\Duplicateur.exe
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\bin\Release\Duplicateur.pdb
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.Chargement.resources
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.MainWindow.resources
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.Properties.Resources.resources
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.csproj.GenerateResource.Cache
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.TrustInfo.xml
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.exe.manifest
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.application
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.exe
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.pdb
+C:\Users\Bot\Desktop\duplicateur_Rudy\Duplicateur\obj\Release\Duplicateur.csprojResolveAssemblyReference.cache
